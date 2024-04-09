@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet"  href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>UMC Study Plan</h1>
+        <hr width="90%" color="white" noshade/>
+        <div class="todo-box">
+            <form onsubmit="return false">
+                <input type="text" id="todo" name="todo" placeholder="스터디 계획을 작성해보세요!" onkeypress="onKeyUp(event)">
+            </form>
+            <div class="every-box">
+                <div class="todo-list">
+                    <h3>해야할 일</h3>
+                    <hr width="90%" color="white" noshade/>
+                    <ul id="todoList">
+                    </ul>
+                </div>
+                <div class="finsh-list">
+                    <h3>해낸 일</h3>
+                    <hr width="90%" color="white" noshade/>
+                    <ul id="doneList">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/todoList.js" charset="UTF-8"></script>
+</body>
+</html>
