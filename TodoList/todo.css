@@ -11,8 +11,7 @@ h1{
 
 hr{
     width: 85vw;
-    background: lightblue;
-    border-width: 1px;
+    border: 1px solid lightblue;
     margin-bottom: 20px;
 }
 
@@ -34,4 +33,28 @@ input{
 
 .subtitle{
     border-bottom: 2px solid lightblue;
+}
+
+h4{
+    text-decoration-line: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: lightblue;
+}
+
+li{
+    /* background-color: coral; */
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid lightblue;
+}
+
+span{
+    margin: 10px 0px;
+}
+
+button{
+    background-color: lightblue;
+    border: none;
+    margin: 10px 0px;
 }
