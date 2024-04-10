@@ -1,0 +1,104 @@
+body{
+    background-color: #ACD8E6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box{
+    background-color: #DFF0F5;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center; 
+}
+
+.form-group {
+    margin-right: 70px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.error-message {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    margin-right: 60px;
+    color: rgba(255, 0, 0, 1);
+    margin-top: 5px;
+}
+
+.success-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: rgba(41, 212, 91, 1);
+    margin-top: 5px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    margin-right: 60px;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    padding: 5px;
+    background-color: #DFF0F5;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-top: 5px;
+    width: 150%;
+    
+}
+
+#submitButton {
+    background-color: #808080;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 200%;
+}
+
+.modal-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.modal {
+    background: white;
+    padding: 24px 16px;
+    border-radius: 4px;
+    width: 320px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.modal-wrapper button {
+    float: right;
+}
