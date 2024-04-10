@@ -26,6 +26,10 @@ input{
     text-align: center;
 }
 
+.gap{
+    width: 20vw;
+}
+
 .container{
     width: 300px;
     text-align: center;
@@ -41,8 +45,11 @@ h4{
     text-decoration-color: lightblue;
 }
 
+ul{
+    padding: 0;
+}
+
 li{
-    /* background-color: coral; */
     list-style: none;
     display: flex;
     justify-content: space-between;
