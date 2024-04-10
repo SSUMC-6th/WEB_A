@@ -12,37 +12,39 @@
             <h1>회원가입</h1>
             <hr>
             <form>
-                <label for="username">이름</label> <br>
-                <input type="text" id="username" name="username"/> <br>
-                    <div class="success hide">멋진 이름이네요!</div>
-                    <div class="fail hide">필수 입력 항목입니다!</div>
-                <label for="email">이메일</label> <br>
-                <input type="email" id="email" name="email"/> <br>
-                    <div class="success hide">올바른 이메일 형식입니다!</div>
-                    <div class="fail hide">올바른 이메일 형식이 아닙니다!</div>
-                <label for="age">나이</label> <br>
-                <input type="text" id="age" name="age"/> <br>
-                    <div class="success hide">올바른 나이 형식입니다!</div>
-                    <div class="fail hide">나이를 입력해주세요!</div>
-                    <div class="num hide">나이는 숫자 형식이어야 합니다!</div>
-                    <div class="minus hide">나이는 음수가 될 수 없습니다!</div>
-                    <div class="integer hide">나이는 소수가 될 수 없습니다!</div>
-                    <div class="adult hide">미성년자는 가입할 수 없습니다!</div>
-                <label for="password">비밀번호</label> <br>
-                <input type="password" id="password" name="password" min="4" max="12"/> <br>
-                    <div class="success hide">올바른 비밀번호입니다!</div>
-                    <div class="fail hide">비밀번호는 최소 4자리 이상이어야 합니다.</div>
-                    <div class="max hide">비밀번호는 최대 12자리까지 가능합니다.</div>
-                    <div class="pwPattern hide">비밀번호는 영어, 숫자, 특수문자를 모두 조합해야 합니다.</div>
-                <label for="pwConfirm">비밀번호 확인</label> <br>
-                <input type="password" id="pwConfirm" name="pwConfirm"/> <br>
-                    <div class="success hide">비밀번호가 일치합니다.</div>
-                    <div class="fail hide">비밀번호가 일치하지 않습니다.</div>
+                <div class="form-container">
+                    <label for="username">이름</label> <br>
+                    <input type="text" id="username" name="username"/> <br>
+                        <div class="success hide">멋진 이름이네요!</div>
+                        <div class="fail hide">필수 입력 항목입니다!</div>
+                    <label for="email">이메일</label> <br>
+                    <input type="email" id="email" name="email"/> <br>
+                        <div class="success hide">올바른 이메일 형식입니다!</div>
+                        <div class="fail hide">올바른 이메일 형식이 아닙니다!</div>
+                    <label for="age">나이</label> <br>
+                    <input type="text" id="age" name="age"/> <br>
+                        <div class="success hide">올바른 나이 형식입니다!</div>
+                        <div class="fail hide">나이를 입력해주세요!</div>
+                    <label for="password">비밀번호</label> <br>
+                    <input type="password" id="password" name="password" min="4" max="12"/> <br>
+                        <div class="success hide">올바른 비밀번호입니다!</div>
+                        <div class="fail hide">비밀번호는 최소 4자리 이상이어야 합니다.</div>
+                    <label for="pwConfirm">비밀번호 확인</label> <br>
+                    <input type="password" id="pwConfirm" name="pwConfirm"/> <br>
+                        <div class="success hide">비밀번호가 일치합니다.</div>
+                        <div class="fail hide">비밀번호가 일치하지 않습니다.</div>
+                </div>    
                 <input type="button" id="submitButton" value="가입하기" onclick="check()">
             </form>
         </div>
+        <div class="modal-container" style="display: none;">
+            <div class="modal">
+                <h3>가입 성공!</h3>
+                <h4>umc 챌린저 가입을 축하합니다!</h4>
+                <div class="close-container"><button id="closeButton" onclick="close()">닫기</button></div>
+            </div>
+        </div>
     </div>
-
     <script src="signup.js"></script>
 </body>
 </html>

@@ -11,7 +11,6 @@ function addTodo(){
     const newTodo = document.createElement('li');
     const todoText = document.createElement('span');
     const doneBtn = document.createElement('button');
-    // newTodo.id = Date.now();
     todoText.textContent = todoInput.value;
     doneBtn.innerText = "완료";
 

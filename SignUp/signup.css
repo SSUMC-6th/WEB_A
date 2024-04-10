@@ -8,7 +8,7 @@ body{
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    margin-left: 20%;
+    margin-left: 23%;
     margin-top: 80px;
 }
 
@@ -23,11 +23,14 @@ hr{
 form{
     width: 300px;
     margin-left: 28%;
+    text-align: center;
+}
+
+.form-container{
     text-align: left;
 }
 
 label, input{
-    /* display: block; */
     margin-bottom: 10px;
 }
 
@@ -49,11 +52,11 @@ input{
     color: white;
     border: none;
     padding: 12px;
+    margin-top: 20px;
 }
 
 div{
     margin-bottom: 16px;
-    /* font-size: 10px; */
 }
 
 .success{
@@ -68,6 +71,25 @@ div{
     display: none;
 }
 
-.num, .minus, .integer, .adult, .max, .pwPattern{
-    color: red;
+.modal-container{
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal{
+    position: absolute;
+    top: calc(50vh - 100px); left: calc(50vw - 200px);
+    width: 400px;
+    height: 120px;
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.close-container{
+    text-align: right;
 }
