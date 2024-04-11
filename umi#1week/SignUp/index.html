@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SingUp</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signup-container">
+            <h1>회원가입</h1>
+            <hr>
+            <form>
+                <div class="form-container">
+                    <label for="username">이름</label> <br>
+                    <input type="text" id="username" name="username"/> <br>
+                        <div class="success hide">멋진 이름이네요!</div>
+                        <div class="fail hide">필수 입력 항목입니다!</div>
+                    <label for="email">이메일</label> <br>
+                    <input type="email" id="email" name="email"/> <br>
+                        <div class="success hide">올바른 이메일 형식입니다!</div>
+                        <div class="fail hide">올바른 이메일 형식이 아닙니다!</div>
+                    <label for="age">나이</label> <br>
+                    <input type="text" id="age" name="age"/> <br>
+                        <div class="success hide">올바른 나이 형식입니다!</div>
+                        <div class="fail hide">나이를 입력해주세요!</div>
+                    <label for="password">비밀번호</label> <br>
+                    <input type="password" id="password" name="password" min="4" max="12"/> <br>
+                        <div class="success hide">올바른 비밀번호입니다!</div>
+                        <div class="fail hide">비밀번호는 최소 4자리 이상이어야 합니다.</div>
+                    <label for="pwConfirm">비밀번호 확인</label> <br>
+                    <input type="password" id="pwConfirm" name="pwConfirm"/> <br>
+                        <div class="success hide">비밀번호가 일치합니다.</div>
+                        <div class="fail hide">비밀번호가 일치하지 않습니다.</div>
+                </div>    
+                <input type="button" id="submitButton" value="가입하기" onclick="check()">
+            </form>
+        </div>
+        <div class="modal-container" style="display: none;">
+            <div class="modal">
+                <h3>가입 성공!</h3>
+                <h4>umc 챌린저 가입을 축하합니다!</h4>
+                <div class="close-container"><button id="closeButton" onclick="close()">닫기</button></div>
+            </div>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+body{
+    background-color:lightblue;
+}
+
+.signup-container{
+    width: 800px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-left: 23%;
+    margin-top: 80px;
+}
+
+hr{
+    background: white;
+    width: 60%;
+    height: 2px;
+    border: 0;
+    margin-bottom: 30px;
+}
+
+form{
+    width: 300px;
+    margin-left: 28%;
+    text-align: center;
+}
+
+.form-container{
+    text-align: left;
+}
+
+label, input{
+    margin-bottom: 10px;
+}
+
+label{
+    float: left;
+}
+
+input{
+    width: 300px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 10px;
+}
+
+#submitButton{
+    width: 250px;
+    background-color: dimgrey;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 20px;
+}
+
+div{
+    margin-bottom: 16px;
+}
+
+.success{
+    color: green;
+}
+
+.fail{
+    color: red;
+}
+
+.hide{
+    display: none;
+}
+
+.modal-container{
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal{
+    position: absolute;
+    top: calc(50vh - 100px); left: calc(50vw - 200px);
+    width: 400px;
+    height: 120px;
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.close-container{
+    text-align: right;
+}
