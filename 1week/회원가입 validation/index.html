@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="box">
+        <h2>회원가입</h2>
+        <hr>
+        <div class="form-group">
+            <label for="name">이름</label>
+            <br>
+            <input type="text" id="username" name="name">
+            <div class="username-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <br>
+            <input type="email" id="email" name="email">
+            <div class="email-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="age">나이</label>
+            <br>
+            <input type="number" id="age" name="age">
+            <div class="age-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <br>
+            <input type="password" id="password" name="password">
+            <div class="password-error"></div>
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">비밀번호 확인</label>
+            <br>
+            <input type="password" id="verifyPassword" name="confirm_password">
+            <div class="verifyPassword-error"></div>
+        </div>
+        <div class="form-group">
+            <br>
+            <button id="submitButton" type="submit">가입하기</button>
+        </div>
+    </div>
+
+    <div class="modal-wrapper" style="display: none;">
+        <div class="modal">
+            <div class="modal-title">가입 성공!</div>
+            <p>umc 챌린저 가입을 축하합니다!!</p>
+            <div class="close-wrapper">
+                <button id="close">닫기</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./signup.js"></script>
+</body>
+</html>
