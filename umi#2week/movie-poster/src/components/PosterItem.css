@@ -1,0 +1,51 @@
+.poster-container{
+    width: fit-content;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.poster-container:hover .overview-container{
+    opacity: 1;
+}
+
+.overview-container{
+    opacity: 0;
+    width: 176px;
+    height: 368px;
+    background: rgb(0, 0, 0, 0.7);
+    position: absolute;
+    color: white;
+    padding: 12px;
+}
+
+.overview-title{
+    font-weight: 600;
+}
+
+.overview{
+    height: 290px;
+    overflow: hidden;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 130%;
+}
+
+.poster-outline{
+    margin: 12px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    width: 134px;
+    height: 40px;
+    color: white;
+}
+
+.vote-average{
+    display: inline-block;
+    color: #999;
+    margin: 0px 0px 0px 3px;
+}
