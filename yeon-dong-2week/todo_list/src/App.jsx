@@ -13,27 +13,26 @@ function App() {
     { id: 4, content: "Watching You-Tube", isDone: true },
   ]);
 
-  const newId = useRef(5);
+  const nextId = useRef(5);
   const addTodo = useCallback(
     (data) => {
       const todo = {
-        id: newId.current,
+        id: nextId.current,
         data,
         isDone: false,
       };
       setTodos(todos.concat(todo));
-      newId.current++;
+      nextId.current++;
     },
     [todos],
   );
-
 
   return (
     <>
       <TodoInput addTodo={addTodo}></TodoInput>
       <div className='todo-box'>
-        <TodoList/>
-        <DoneList/>
+        <TodoList todo={todos}/>
+        <DoneList todo={todos}/>
       </div>
     </>
   )

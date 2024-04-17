@@ -5,11 +5,11 @@ function TodoInput({addTodo}) {
 
   const onSubmit = useCallback(
       e => {
-          onAdd(newTodo);
+          addTodo(newTodo);
           setNewTodo('');
           e.preventDefault();
       }
-  , [onAdd, newTodo]);
+  , [addTodo, newTodo]);
 
   const onChange = useCallback(
       e => {
@@ -20,7 +20,7 @@ function TodoInput({addTodo}) {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input onChange={onChange} value={newTodo} type='text' id='todoList' placeholder='UMC 스터디 계획을 작성해보세요!'/>
+        <input onChange={onChange} value={newTodo} type='text' id='todoInput' placeholder='UMC 스터디 계획을 작성해보세요!'/>
       </form>
     </>
   )
