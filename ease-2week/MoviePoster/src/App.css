@@ -48,6 +48,7 @@ img{
 
 .movieContainer:hover .overviewContainer{
   display: flex;
+  cursor: pointer;
 }
 
 .overview{
