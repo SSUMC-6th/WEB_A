@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 
-function DoneList({todos}) {
-  const doneTodos = todos&&todos.filter(todo => todo.isDone);
+function DoneList({todos, setTodos}) {
+  const doneTodos = todos.filter(todo => todo.isDone);
 
   const onRemove = useCallback(
     (id) => {

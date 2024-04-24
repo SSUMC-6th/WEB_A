@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react'
 
-function TodoList({todos}) {
-  const todoItems = todos&&todos.filter(todo => !todo.isDone);
+function TodoList({todos, setTodos}) {
+  console.log(todos);
+  const todoItems = todos.filter(todo => !todo.isDone);
 
   const onIsDone = useCallback(
     (id) => {

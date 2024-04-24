@@ -18,21 +18,21 @@ function App() {
     (data) => {
       const todo = {
         id: nextId.current,
-        data,
+        content:data,
         isDone: false,
       };
-      setTodos(todos.concat(todo));
+      setTodos((prev)=>[...prev, todo]);
       nextId.current++;
     },
-    [todos],
+    [],
   );
 
   return (
     <>
       <TodoInput addTodo={addTodo}></TodoInput>
       <div className='todo-box'>
-        <TodoList todo={todos}/>
-        <DoneList todo={todos}/>
+        <TodoList todos={todos} setTodos={setTodos}/>
+        <DoneList todos={todos} setTodos={setTodos}/>
       </div>
     </>
   )
