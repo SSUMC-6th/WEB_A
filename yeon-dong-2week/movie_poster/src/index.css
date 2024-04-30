@@ -1,0 +1,64 @@
+body{
+  background-color: #042940;
+}
+
+.app-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-container{
+  position: relative;
+  width: 250px;
+  margin: 16px;
+  background-color: #005C53;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.movie-container img{
+  max-width: 100%;
+}
+
+.movie-info{
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-info h4{
+  margin: 0;
+}
+
+.movie-info span{
+  margin-left: 3px;
+}
+
+.overview-container{
+  opacity: 0;
+  background: rgb(0, 0, 0, 0.8);
+  position: absolute;
+  top: 0; /* 추가 */
+  left: 0; /* 추가 */
+  width: 100%; /* 수정 */
+  height: 100%; /* 수정 */
+  overflow: auto;
+  color: darkgray;
+}
+
+.overview-container h4{
+  padding: 16px;
+  margin: 0;
+}
+
+.overview-container p{
+  padding: 12px;
+  margin: 0; 
+}
+
+.overview-container:hover{
+  opacity: 1;
+}

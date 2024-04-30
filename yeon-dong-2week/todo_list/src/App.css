@@ -1,0 +1,41 @@
+#root {
+  width: 100%;
+}
+
+form{
+  margin-top: 4vh;
+  display: flex;
+  justify-content: center;
+}
+
+input{
+  width: 30%;
+  padding-left: 20px;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  font-style: italic;
+  color: gray;
+  font-size: large;
+}
+
+li{
+  padding-left: 0px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px solid white;
+  margin-bottom: 10px;
+}
+
+.todo-data{
+  margin: 10px 0px;
+  margin-right: 10px;
+}
+
+#todoList{
+  padding-left: 0px;
+}
+
+#doneList{
+  padding-left: 0px;
+}
