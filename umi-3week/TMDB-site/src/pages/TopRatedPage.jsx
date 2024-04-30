@@ -21,7 +21,6 @@ function TopRatedPage(){
         .catch(err => console.error(err));
     }, [])
 
-    console.log(movies)
     return(
         <>
         <div className='container'>

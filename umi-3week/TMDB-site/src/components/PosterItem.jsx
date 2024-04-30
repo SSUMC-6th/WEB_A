@@ -1,13 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
 
-const PosterContainer = styled.div`
-    width: 200px;
-    background-color: #222;
-    border-radius: 8px;
-    overflow: hidden;
-`
-
 const OverviewContainer = styled.div`
     opacity: 0;
     width: 176px;
@@ -17,6 +10,16 @@ const OverviewContainer = styled.div`
     color: white;
     padding: 12px;
     border-radius: 8px;
+`
+
+const PosterContainer = styled.div`
+    width: 200px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    ${OverviewContainer}: hover{
+        opacity: 1;
+    }
 `
 
 const OverviewTitle = styled.p`

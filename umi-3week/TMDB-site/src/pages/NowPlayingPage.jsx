@@ -16,12 +16,10 @@ function NowPlayingPage(){
     
     useEffect(()=>{
         fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
-        .then(response => response.json())
         .then(response => setMovies(response.results))
         .catch(err => console.error(err));
     }, [])
 
-    console.log(movies)
     return(
         <>
         <div className='container'>
