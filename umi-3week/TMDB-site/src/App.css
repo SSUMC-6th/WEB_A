@@ -27,20 +27,6 @@
   }
 }
 
-.footer{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 20px;
-  background-color: #222;
-  color: white;
-}
-
-.umc-link{
-  float: right;
-}
-
 .active{
   color: gold;
 }

@@ -2,9 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import './Page.css'
 import PosterItem from "../components/PosterItem";
+import Loading from "../components/Loading";
 
 function UpcomingPage(){
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const options = {
         method: 'GET',
@@ -15,16 +17,18 @@ function UpcomingPage(){
       };
     
     useEffect(()=>{
+        setLoading(true);
         fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options)
         .then(response => response.json())
         .then(response => setMovies(response.results))
         .catch(err => console.error(err));
+        setLoading(false);
     }, [])
 
-    console.log(movies)
     return(
         <>
         <div className='container'>
+        {loading ? <Loading/> : null}
         {movies && movies.map((movie) => (
             <PosterItem
             key={movie.id}

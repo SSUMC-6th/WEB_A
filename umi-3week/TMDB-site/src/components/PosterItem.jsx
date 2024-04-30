@@ -10,7 +10,7 @@ const OverviewContainer = styled.div`
     color: white;
     padding: 12px;
     border-radius: 8px;
-`
+`;
 
 const PosterContainer = styled.div`
     width: 200px;
@@ -20,11 +20,11 @@ const PosterContainer = styled.div`
     ${OverviewContainer}: hover{
         opacity: 1;
     }
-`
+`;
 
 const OverviewTitle = styled.p`
     font-weight: 600;
-`
+`;
 
 const Overview = styled.p`
     height: 290px;
@@ -32,28 +32,28 @@ const Overview = styled.p`
     font-weight: 300;
     font-size: 14px;
     line-height: 130%;
-`
+`;
 
 const PosterOutline = styled.div`
     margin: 12px;
     padding-bottom: 16px;
     display: flex;
     justify-content: space-between;
-`
+`;
 
 const Title = styled.div`
     width: 120px;
     height: 40px;
     color: white;
-`
+`;
 
-const Vote = styled.div``
+const Vote = styled.div``;
 
 const VoteAverage = styled.p`
     display: inline-block;
     color: #999;
     margin: 0px 0px 0px 3px;
-`
+`;
 
 function PosterItem({title, voteAverage, overview, posterPath}){
 
