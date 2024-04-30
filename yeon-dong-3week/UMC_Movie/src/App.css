@@ -40,19 +40,18 @@
 
 .header-nav-item:hover{
     font-size: 20px;
-
+    color: rgb(218, 207, 0);
 }
 
 .header-right-wrap ul{
     display: flex;
     justify-content: space-between;
-    
+    align-items: center;
 }
 
 .header-right-wrap ul > li{
     margin-left: 12px;
     margin-right: 12px;
-    align-items: center;
 }
 
 .app-container {

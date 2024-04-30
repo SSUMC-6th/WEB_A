@@ -15,22 +15,22 @@ function Header() {
               <ul>
                 <li>
                   <Link className="header-nav-item" to='/now'>
-                    now
+                    Now Playing
                   </Link>
                 </li>
                 <li>
                   <Link className="header-nav-item" to='/popular'>
-                    pop
+                    Popular
                   </Link>
                 </li>
                 <li>
                   <Link className="header-nav-item" to='/top'>
-                    top
+                    Top Rated
                   </Link>
                 </li>
                 <li>
                   <Link className="header-nav-item" to='/coming'>
-                    coming
+                    Upcoming
                   </Link>
                 </li>
               </ul>
