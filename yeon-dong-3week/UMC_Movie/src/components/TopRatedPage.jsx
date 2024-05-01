@@ -29,7 +29,6 @@ function TopRatedPage() {
         console.error('Error fetching top rated movies:', error);
       }
     };
-
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     fetchTopRatedMovies();
   }, []); // 빈 배열을 전달하여 한 번만 호출되도록 설정
