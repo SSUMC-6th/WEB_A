@@ -1,0 +1,80 @@
+import React from "react";
+import styled from 'styled-components'
+
+const OverviewContainer = styled.div`
+    opacity: 0;
+    width: 176px;
+    height: 368px;
+    background: rgb(0, 0, 0, 0.7);
+    position: absolute;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+`;
+
+const PosterContainer = styled.div`
+    width: 200px;
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    ${OverviewContainer}: hover{
+        opacity: 1;
+    }
+`;
+
+const OverviewTitle = styled.p`
+    font-weight: 600;
+`;
+
+const Overview = styled.p`
+    height: 290px;
+    overflow: hidden;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 130%;
+`;
+
+const PosterOutline = styled.div`
+    margin: 12px;
+    padding-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+`;
+
+const Title = styled.div`
+    width: 120px;
+    height: 40px;
+    color: white;
+`;
+
+const Vote = styled.div``;
+
+const VoteAverage = styled.p`
+    display: inline-block;
+    color: #999;
+    margin: 0px 0px 0px 3px;
+`;
+
+function PosterItem({title, voteAverage, overview, posterPath}){
+
+    return(
+        <>
+        <PosterContainer>
+            <OverviewContainer>
+                <OverviewTitle>{title}</OverviewTitle>
+                <Overview>{overview}</Overview>
+            </OverviewContainer>
+            <img src={`https://image.tmdb.org/t/p/w200${posterPath}`} width="200px" height="300px"/>
+            <PosterOutline>
+                <Title>{title}</Title>
+                <Vote>
+                    <img src="src/assets/star.png" width="12px" height="12px"/>
+                    <VoteAverage>{voteAverage}</VoteAverage>
+                </Vote>
+            </PosterOutline>
+        </PosterContainer>
+        </>
+    );
+}
+
+export default PosterItem;
