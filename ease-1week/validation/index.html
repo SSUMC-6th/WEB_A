@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <link rel="stylesheet" href="./Style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>회원가입</h2>
+            <form id="form">
+                <label for="username">이름:</label><br>
+                <input type="text" id="username" name="username">
+                <div id="nameerror"></div><br>
+
+                <label for="useremail">이메일:</label><br>
+                <input type="text" id="useremail" name="useremail">
+                <div id="emailerror"></div><br>
+
+                <label for="userage">나이:</label><br>
+                <input type="text" id="userage" name="userage">
+                <div id="ageerror"></div><br>
+
+                <label for="password">비밀번호:</label><br>
+                <input type="password" id="password" name="password">
+                <div id="pwderror"></div><br>
+
+                <label for="pwdcheck">비밀번호 확인:</label><br>
+                <input type="password" id="pwdcheck" name="pwdcheck">
+                <div id="pwdchkerror"></div><br>
+
+                <input id ="button" type="submit" value="가입하기">
+            </form>
+        </div>
+    </div>
+    <div id="pop">
+        <h3>가입 성공!</h3>
+        <p>회원가입을 축하합니다</p>
+        <button id="popclose" type="button">닫기</button>
+    </div>
+
+    <script src="Script1.js"></script>
+</body>
+</html>
