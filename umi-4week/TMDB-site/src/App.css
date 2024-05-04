@@ -1,0 +1,32 @@
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 60px;
+  background-color: #222;
+}
+
+.contents {
+  display: flex;
+  width: 96%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation {
+  ul {
+    display: flex;
+    list-style: none;
+
+    li {
+      margin-left: 30px;
+    }
+  }
+}
+
+.active {
+  color: gold;
+}
