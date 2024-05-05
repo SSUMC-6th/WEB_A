@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const OverviewContainer = styled.div`
   opacity: 0;
@@ -57,10 +58,12 @@ const VoteAverage = styled.p`
 `;
 
 // eslint-disable-next-line react/prop-types
-function PosterItem({ title, voteAverage, overview, posterPath }) {
+function PosterItem({ id, title, voteAverage, overview, posterPath }) {
+  const navigate = useNavigate();
+
   return (
     <>
-      <PosterContainer>
+      <PosterContainer onClick={() => navigate(`/movie/${title}/${id}`)}>
         <OverviewContainer>
           <OverviewTitle>{title}</OverviewTitle>
           <Overview>{overview}</Overview>

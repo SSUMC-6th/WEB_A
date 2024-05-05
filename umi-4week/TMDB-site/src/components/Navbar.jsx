@@ -1,7 +1,37 @@
 //eslint-disable-next-line
 import React from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+
+const Header = styled.header`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 60px;
+  background-color: #222;
+`;
+
+const Contents = styled.div`
+  display: flex;
+  width: 96%;
+  height: 100%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Nav = styled.nav`
+  ul {
+    display: flex;
+    list-style: none;
+
+    li {
+      margin-left: 30px;
+    }
+  }
+`;
 
 const NavItem = styled(NavLink)`
   &:hover {
@@ -11,9 +41,15 @@ const NavItem = styled(NavLink)`
 `;
 
 function Navbar() {
+  const [login, setLogin] = useState(false);
+
+  const loginClick = () => {
+    setLogin(!login);
+  };
+
   return (
-    <header className="header">
-      <div className="contents">
+    <Header>
+      <Contents>
         <div>
           <NavItem
             to="/popular"
@@ -23,10 +59,10 @@ function Navbar() {
           </NavItem>
         </div>
 
-        <nav className="navigation">
+        <Nav>
           <ul>
-            <NavItem to="/">
-              <li>회원가입</li>
+            <NavItem to="/" onClick={loginClick}>
+              <li>{login ? "로그아웃" : "로그인"}</li>
             </NavItem>
             <NavItem to="/popular">
               <li>Popular</li>
@@ -41,9 +77,9 @@ function Navbar() {
               <li>Upcoming</li>
             </NavItem>
           </ul>
-        </nav>
-      </div>
-    </header>
+        </Nav>
+      </Contents>
+    </Header>
   );
 }
 

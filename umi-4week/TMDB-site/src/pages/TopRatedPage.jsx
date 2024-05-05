@@ -38,6 +38,7 @@ function TopRatedPage() {
           movies.map((movie) => (
             <PosterItem
               key={movie.id}
+              id={movie.id}
               title={movie.title}
               voteAverage={movie.vote_average}
               overview={movie.overview}

@@ -1,3 +1,8 @@
+body {
+  color: white;
+  justify-content: center;
+}
+
 .wrapper {
   position: absolute;
   top: 200px;
