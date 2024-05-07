@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import "./Page.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -27,6 +26,7 @@ const Container = styled.div`
   width: fit-content;
   text-align: center;
   transform: translate(50%, 45%);
+  color: white;
   img {
     border-radius: 8px;
   }
@@ -36,7 +36,7 @@ const OverviewContainer = styled.div`
   width: 400px;
   text-align: left;
   margin-left: 60px;
-  margin-top: 24px;
+  margin-top: 12px;
 `;
 
 const InfoContainer = styled.div`
@@ -60,8 +60,18 @@ const Text = styled.div`
   margin-right: 12px;
 `;
 
+const Box = styled.div``;
+
+const LoadImage = styled.div`
+  width: 300px;
+  height: 440px;
+  background-color: #444;
+  border-radius: 8px;
+`;
+
 function MovieDetailPage() {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   const options = {
@@ -74,9 +84,11 @@ function MovieDetailPage() {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
       .then((response) => response.json())
       .then((response) => setMovies(response))
+      .then(() => setLoading(false))
       .catch((err) => console.error(err));
   }, []);
 
@@ -95,29 +107,33 @@ function MovieDetailPage() {
       >
         <Blur>
           <Container>
-            <img
-              src={`https://image.tmdb.org/t/p/w200${movies.poster_path}`}
-              width="300px"
-              height="440px"
-            />
+            {loading ? (
+              <LoadImage />
+            ) : (
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movies.poster_path}`}
+                width="300px"
+                height="440px"
+              />
+            )}
             <OverviewContainer>
               <Title>{movies.title}</Title>
               <InfoContainer>
                 <Text>평점</Text>
-                <div>{starCount()}</div>
+                <Box>{starCount()}</Box>
               </InfoContainer>
               <InfoContainer>
                 <Text>개봉일</Text>
-                <div>{movies.release_date}</div>
+                <Box>{movies.release_date}</Box>
               </InfoContainer>
-              <div>
+              <Box>
                 <Text>줄거리</Text>
                 <Overview>
                   {movies.overview == ""
                     ? "TMDB에서 제공하는 API에 상세 줄거리 정보가 없습니다."
                     : movies.overview}
                 </Overview>
-              </div>
+              </Box>
             </OverviewContainer>
           </Container>
         </Blur>
