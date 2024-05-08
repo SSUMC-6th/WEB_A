@@ -36,7 +36,7 @@ function MainPage() {
     return (
     <Main>    
         <Welcome>
-            <div>환영합니다</div>
+            <div>환영</div>
         </Welcome>
         <Find>
             <div>Find your movies !</div>

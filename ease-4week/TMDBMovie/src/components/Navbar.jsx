@@ -1,30 +1,88 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React, {useState} from 'react'
+import {NavLink} from 'react-router-dom'
+import styled from 'styled-components'
+
+const NavbarContainer = styled.div`
+        background-color: rgb(3, 37, 65);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 7%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+        z-index: 2;
+    `;
+
+    const Logo = styled.div`
+        a{
+            text-decoration: none;
+        }
+    `;
+    const NavbarSt = styled.div`
+        display: flex;
+        flex-direction: row;
+    `;
+      
+    const LoginSt = styled.button`
+        color: yellow;
+        border: 0;
+        background-color: transparent;
+    `;
+
+    const NavbarMenu = styled(NavLink)`
+        text-decoration: none;
+        color: white;
+        &.active{
+            color: yellow;
+        }
+   `;
+      
+    const NavContent = styled.div`
+        font-weight: 550;
+        margin: 14px; 
+        cursor: pointer;
+
+        &:hover{
+            transform: scale(1.1);
+            transition-duration: 0.5s;
+        }
+    `;
 
 function Navbar() {
+    const [islogin, setlogin] = useState('로그인');
+    const login = () =>{
+        setlogin(prev => prev === '로그인'? '로그아웃' : '로그인')
+    }
     
     return (
-    <div className="NavbarContainer">
-        <div className="logo">
-            <Link to='/'>
-                <div className="logoContent">UMC Movie</div>
-            </Link>
-        </div>
-        <div className="Navbar">
-            <Link className="Navbar-menu" to="/popular">
-                <div className="Navbar-content">Popular</div>
-            </Link>
-            <Link className="Navbar-menu" to="/nowplaying">
-                <div className="Navbar-content">Now Playing</div>
-            </Link>
-            <Link className="Navbar-menu" to="/toprated">
-                <div className="Navbar-content">Top Rated</div>
-            </Link>
-            <Link className="Navbar-menu" to="/upcoming">
-                <div className="Navbar-content">Upcoming</div>
-            </Link>
-        </div>
-    </div>
+    <NavbarContainer>
+        <Logo>
+            <NavbarMenu to='/' >
+                <NavContent>UMC Movie</NavContent>
+            </NavbarMenu>
+        </Logo>
+        <NavbarSt>
+            <LoginSt onClick={login}>
+                <NavContent>{islogin}</NavContent>
+            </LoginSt>
+            <NavbarMenu to="/popular">
+                <NavContent>Popular</NavContent>
+            </NavbarMenu>
+            <NavbarMenu to="/nowplaying">
+                <NavContent>Now Playing</NavContent>
+            </NavbarMenu>
+            <NavbarMenu to="/toprated">
+                <NavContent>Top Rated</NavContent>
+            </NavbarMenu>
+            <NavbarMenu to="/upcoming">
+                <NavContent>Upcoming</NavContent>
+            </NavbarMenu>
+        </NavbarSt>
+    </NavbarContainer>
     )
 }
   

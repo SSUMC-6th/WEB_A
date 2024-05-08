@@ -38,9 +38,11 @@ function UpComing() {
             <div className="PosterContainer">{Movies.map(movie =>
             <Movie
             key={movie.id}
-            title={movie.original_title}
+            title={movie.title}
             poster_path={movie.poster_path}
-            vote_avg={movie.vote_average}/>
+            vote_avg={movie.vote_average}
+            release_date={movie.release_date}
+            overview={movie.overview}/>
             )}
             </div>}
     </div>
