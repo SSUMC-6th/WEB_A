@@ -10,8 +10,6 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./components/Header/Header";
 
 function App() {
-
-
   return (
     <>
       <div className='root-wrap'>
@@ -19,7 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/detail" element={<MovieDetailPage />}></Route>
+          <Route path="/detail/:id" element={<MovieDetailPage />}></Route>
           <Route path="/now" element={<NowPlayingPage />}></Route>
           <Route path="/popular" element={<PopularPage />}></Route>
           <Route path="/top" element={<TopRatedPage />}></Route>
