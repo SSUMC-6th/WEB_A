@@ -17,7 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/detail/:id" element={<MovieDetailPage />}></Route>
+          <Route path="/movie/:id" element={<MovieDetailPage />}></Route>
           <Route path="/now" element={<NowPlayingPage />}></Route>
           <Route path="/popular" element={<PopularPage />}></Route>
           <Route path="/top" element={<TopRatedPage />}></Route>

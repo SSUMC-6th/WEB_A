@@ -19,8 +19,7 @@ export const MovieInfo = styled.div`
         border-top-right-radius: 5px;
     }
 
-
-
+    cursor:pointer;
 
 `;
 

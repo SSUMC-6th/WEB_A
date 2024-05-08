@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import { MovieContainer, MovieInfo, MovieInfoContent } from './MovieCard.style';
+import { useNavigate } from "react-router-dom";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
 function MovieCard({urlType}) {
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     // TMDB API에서 현재 상영 중인 영화를 가져오는 함수
     const fetchMovies = async () => {
@@ -39,7 +42,7 @@ function MovieCard({urlType}) {
       {loading ? (<LoadingSpinner />) : (
       <MovieContainer>
         {movies.map(movie => (
-          <MovieInfo key={movie.id}>
+          <MovieInfo key={movie.id} onClick={() => navigate(`/movie/${movie.id}`)}>
             {movie.poster_path && (
               <img src={IMG_BASE_URL + movie.poster_path} alt='영화포스터'/>
             )}
