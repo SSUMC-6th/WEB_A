@@ -8,23 +8,18 @@ import {
   StyledUpcoming,
   StyledHome,
 } from "./nav.style";
-import { useState } from "react";
 
 export const Nav = () => {
 
-  const [login, setLogin] = useState(false);
-  const [loginText, setLoginText] = useState("로그인");
-
-  const handleLogin = () => {
-    setLogin(prevLogin => !prevLogin);
-    setLoginText(login ? "로그인" : "로그아웃");
+  const handleGoToSignUp = () => {
+    navigate('/signup');
   }
   const navigate = useNavigate();
 
   return (
     <StyledNav>
       <StyledHome onClick={() => navigate("/")}>UMC Movie</StyledHome>
-      <StyledSignUp onClick={handleLogin}>{loginText}</StyledSignUp>
+      <StyledSignUp onClick={handleGoToSignUp}>회원가입</StyledSignUp>
       <StyledPopular onClick={() => navigate("/popular")}>
         Popular
       </StyledPopular>
