@@ -5,6 +5,6 @@ export const StyledNotFound = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: navy;
+  background-color: #22264c;
   color: white;
 `;

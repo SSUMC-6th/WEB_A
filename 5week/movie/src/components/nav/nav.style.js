@@ -6,7 +6,7 @@ export const StyledNav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  background-color: navy;
+  background-color: #22264c;
   height: 5vh;
   color: white;
 `;
