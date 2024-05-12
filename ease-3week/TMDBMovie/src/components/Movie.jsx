@@ -6,7 +6,6 @@ const Title = styled.div`
     `;
 
 const Poster = styled.div`
-    
 `;
 
 const Vote = styled.div`

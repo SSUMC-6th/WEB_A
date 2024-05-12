@@ -42,7 +42,6 @@ function MainPage() {
             <div>Find your movies !</div>
         </Find>
     </Main>
-
     )
 }
   

@@ -14,7 +14,6 @@ function Loading(){
         <Loadingst>
             <SyncLoader/>
         </Loadingst>
-        
     )
 }
 
