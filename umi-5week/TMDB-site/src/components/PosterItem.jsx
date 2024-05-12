@@ -16,7 +16,9 @@ const OverviewContainer = styled.div`
 
 const PosterContainer = styled.div`
   width: 200px;
+  height: 392px;
   background-color: #222;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   ${OverviewContainer}: hover {
@@ -47,6 +49,8 @@ const Title = styled.div`
   width: 120px;
   height: 40px;
   color: white;
+  text-align: left;
+  overflow: hidden;
 `;
 
 const Vote = styled.div``;
@@ -55,6 +59,12 @@ const VoteAverage = styled.p`
   display: inline-block;
   color: #999;
   margin: 0px 0px 0px 3px;
+`;
+
+const LoadImage = styled.div`
+  width: 200px;
+  height: 300px;
+  background-color: #999;
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -68,11 +78,15 @@ function PosterItem({ id, title, voteAverage, overview, posterPath }) {
           <OverviewTitle>{title}</OverviewTitle>
           <Overview>{overview}</Overview>
         </OverviewContainer>
-        <img
-          src={`https://image.tmdb.org/t/p/w200${posterPath}`}
-          width="200px"
-          height="300px"
-        />
+        {posterPath === null ? (
+          <LoadImage />
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/w200${posterPath}`}
+            width="200px"
+            height="300px"
+          />
+        )}
         <PosterOutline>
           <Title>{title}</Title>
           <Vote>

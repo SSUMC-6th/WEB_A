@@ -1,6 +1,5 @@
 //eslint-disable-next-line
 import React from "react";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -41,18 +40,12 @@ const NavItem = styled(NavLink)`
 `;
 
 function Navbar() {
-  const [login, setLogin] = useState(false);
-
-  const loginClick = () => {
-    setLogin(!login);
-  };
-
   return (
     <Header>
       <Contents>
         <div>
           <NavItem
-            to="/popular"
+            to="/"
             style={({ isActive }) => ({ color: isActive ? "white" : "white" })}
           >
             UMC Movie
@@ -61,8 +54,8 @@ function Navbar() {
 
         <Nav>
           <ul>
-            <NavItem to="/" onClick={loginClick}>
-              <li>{login ? "로그아웃" : "로그인"}</li>
+            <NavItem to="/signup">
+              <li>회원가입</li>
             </NavItem>
             <NavItem to="/popular">
               <li>Popular</li>
