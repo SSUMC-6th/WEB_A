@@ -3,7 +3,8 @@ body{
  }
 
  .NavbarContainer{
-  background-color: rgba(3, 37, 65, 0.594);
+  background-color: rgb(3, 37, 65);
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -12,28 +13,56 @@ body{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 50px;
+  z-index: 1;
  }
 
- .logoContent, .Navbar-menu{
-  color: white;
+ .Navbar{
+  display: flex;
+  flex-direction: row;
+ }
+
+.logo a{
   text-decoration: none;
+}
+.Navbar-menu{
+  text-decoration: none;
+}
+
+.logoContent:hover{
+  transform: scale(1.2);
+  transition-duration: 0.5s;
+}
+
+.logoContent:active{
+  color: yellow;
+}
+
+.Navbar-content:hover{
+  transform: scale(1.2);
+  transition-duration: 0.5s;
+}
+
+ .logoContent, .Navbar-content{
+  color: white;
   font-weight: 550;
   margin: 14px; 
+  cursor: pointer;
  }
 
 .PosterContainer{
+  position: relative;
+  top: 60px;
   display:grid;
   justify-content:center;
   grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 20px;
 }
 
- .MovieContainer{
- }
 
  img{
   width: 100%;
-  height: auto;
+  height: 250px;
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
 }
@@ -42,6 +71,7 @@ body{
   display:flex;
   justify-content: space-between;
   padding: 4% 6% 30%;
+  height: 30px;
   gap: 3%;
   background-color: rgba(240, 248, 255, 0.167);
   border-bottom-left-radius: 5%;
