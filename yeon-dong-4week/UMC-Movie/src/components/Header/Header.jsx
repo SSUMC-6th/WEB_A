@@ -13,7 +13,7 @@ function Header() {
   const [loginstatus, setLoginStatus] = useState(false);
 
   const loginClick = () =>{
-    setLoginStatus(!loginstatus);
+    setLoginStatus(loginstatus => !loginstatus);
   };
 
     return (

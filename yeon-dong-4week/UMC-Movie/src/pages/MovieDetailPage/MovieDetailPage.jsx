@@ -21,14 +21,14 @@ function MovieDetailPage() {
         
         // JSON 형태로 변환
         const data = await response.json();
-
         // 가져온 영화 데이터를 상태에 설정
-        setMovies(data.results);
+        setMovies(data);
+        console.log(movies);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
-      console.log(movies);
+      
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     fetchMovies();
