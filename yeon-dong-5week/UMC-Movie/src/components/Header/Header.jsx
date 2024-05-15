@@ -5,16 +5,10 @@ import {
     HeaderLeftWrap,
     HeaderRightWrap,
     HeaderNavItem,
-    LoginButton
+    SignUpButton
   } from "./Header.style"
-  import React, { useState } from 'react';
 
 function Header() {
-  const [loginstatus, setLoginStatus] = useState(false);
-
-  const loginClick = () =>{
-    setLoginStatus(loginstatus => !loginstatus);
-  };
 
     return (
       <>
@@ -28,9 +22,7 @@ function Header() {
             <HeaderRightWrap>
               <ul>
                 <li>
-                  <LoginButton onClick={loginClick}>
-                    {loginstatus ? "로그아웃" : "로그인"}
-                  </LoginButton>
+                  <SignUpButton to='/signup'>회원가입</SignUpButton>  
                 </li>
                 <li>
                   <HeaderNavItem to='/now'>

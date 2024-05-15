@@ -49,7 +49,7 @@ export const HeaderNavItem = styled(Link)`
     }
 `;
 
-export const LoginButton = styled.div`
+export const SignUpButton = styled(Link)`
     color: white;
     text-decoration: none;
     font-weight: 600;

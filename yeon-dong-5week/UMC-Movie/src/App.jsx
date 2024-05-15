@@ -8,6 +8,7 @@ import TopRatedPage from "./pages/TopRatedPage/TopRatedPage";
 import UpComingPage from "./pages/UpComingPage/UpComingPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Header from "./components/Header/Header";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/popular" element={<PopularPage />}></Route>
           <Route path="/top" element={<TopRatedPage />}></Route>
           <Route path="/coming" element={<UpComingPage />}></Route>
+          <Route path="/signup" element={<SignUpPage />}></Route>
           <Route path="/*" element={<NotFoundPage />}></Route>
         </Routes>
       </BrowserRouter>
