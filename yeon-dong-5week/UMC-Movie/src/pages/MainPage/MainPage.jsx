@@ -1,6 +1,5 @@
 import {StyledMainPage, SearchContainer, SearchInput, SearchButton, MovieContainer, MovieInfo, MovieInfoContent, StyledMovieContainer} from "./MainPage.style"
 import { useState, useEffect } from "react";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { useNavigate } from "react-router-dom";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
@@ -27,7 +26,7 @@ function MainPage() {
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     fetchMovies();
-  }, [search]); // 빈 배열을 전달하여 한 번만 호출되도록 설정
+  }, [search]); // 배열을 전달하여 한 번만 호출되도록 설정
 
     return (
       <>
