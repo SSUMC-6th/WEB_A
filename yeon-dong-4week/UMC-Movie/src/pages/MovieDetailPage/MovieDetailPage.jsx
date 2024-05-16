@@ -28,7 +28,6 @@ function MovieDetailPage() {
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
-      
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     fetchMovies();
