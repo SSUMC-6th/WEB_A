@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { Background, Blur, Container, OverviewContainer, Title, InfoContainer, Text, Box, Overview } from "./MovieDetailPage.style";
 
+
 function MovieDetailPage() {
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [movies, setMovies] = useState([]);
@@ -28,7 +29,6 @@ function MovieDetailPage() {
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
-      
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     fetchMovies();
