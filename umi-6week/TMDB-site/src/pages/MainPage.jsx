@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import PosterItem from "../components/PosterItem";
+import useDebounce from "../hooks/useDebounce";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -86,6 +87,8 @@ function MainPage() {
   const [searchWord, setSearchWord] = useState("");
   const [movies, setMovies] = useState([]);
 
+  const debounceWord = useDebounce(searchWord, 500);
+
   useEffect(() => {
     const options = {
       method: "GET",
@@ -97,14 +100,13 @@ function MainPage() {
     };
 
     fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${searchWord}&include_adult=false&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/search/movie?query=${debounceWord}&include_adult=false&language=en-US&page=1`,
       options
     )
       .then((response) => response.json())
-      // .then((response) => console.log(response.results))
       .then((response) => setMovies(response.results))
       .catch((err) => console.error(err));
-  }, [searchWord]);
+  }, [debounceWord]);
 
   return (
     <Wrapper>
@@ -118,7 +120,7 @@ function MainPage() {
           <SearchIcon>🔍</SearchIcon>
         </SearchContainer>
       </SearchArea>
-      {searchWord == "" ? null : (
+      {debounceWord == "" ? null : (
         <ResultArea>
           <ResultBox>
             {movies &&
