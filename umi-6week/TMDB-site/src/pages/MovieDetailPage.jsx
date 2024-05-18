@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import CreditData from "../components/CreditData";
 
 const Background = styled.div`
   width: 100vw;
@@ -85,6 +86,7 @@ function MovieDetailPage() {
 
   useEffect(() => {
     setLoading(true);
+    //영화정보
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
       .then((response) => response.json())
       .then((response) => setMovies(response))
@@ -137,6 +139,7 @@ function MovieDetailPage() {
             </OverviewContainer>
           </Container>
         </Blur>
+        <CreditData movie_id={id} />
       </Background>
     </>
   );

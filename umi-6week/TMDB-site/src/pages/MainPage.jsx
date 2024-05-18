@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import PosterItem from "../components/PosterItem";
+import Loading from "../components/Loading";
 import useDebounce from "../hooks/useDebounce";
 
 const Wrapper = styled.div`
@@ -83,8 +84,15 @@ const ResultBox = styled.div`
   }
 `;
 
+const LoadText = styled.h2`
+  color: white;
+  text-align: center;
+  margin-top: 200px;
+`;
+
 function MainPage() {
   const [searchWord, setSearchWord] = useState("");
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
 
   const debounceWord = useDebounce(searchWord, 500);
@@ -105,6 +113,7 @@ function MainPage() {
     )
       .then((response) => response.json())
       .then((response) => setMovies(response.results))
+      .then(() => setLoading(false))
       .catch((err) => console.error(err));
   }, [debounceWord]);
 
@@ -123,7 +132,10 @@ function MainPage() {
       {debounceWord == "" ? null : (
         <ResultArea>
           <ResultBox>
-            {movies &&
+            {loading ? (
+              <LoadText>데이터를 받아오는 중입니다...</LoadText>
+            ) : (
+              movies &&
               movies.map((movie) => (
                 <PosterItem
                   key={movie.id}
@@ -133,7 +145,8 @@ function MainPage() {
                   overview={movie.overview}
                   posterPath={movie.poster_path}
                 />
-              ))}
+              ))
+            )}
           </ResultBox>
         </ResultArea>
       )}

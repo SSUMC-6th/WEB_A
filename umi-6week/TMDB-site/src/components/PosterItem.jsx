@@ -73,7 +73,7 @@ function PosterItem({ id, title, voteAverage, overview, posterPath }) {
 
   return (
     <>
-      <PosterContainer onClick={() => navigate(`/movie/${title}/${id}`)}>
+      <PosterContainer onClick={() => navigate(`/movie/${id}`)}>
         <OverviewContainer>
           <OverviewTitle>{title}</OverviewTitle>
           <Overview>{overview}</Overview>

@@ -23,7 +23,7 @@ function App() {
         <Route path="/popular" element={<PopularPage />} />
         <Route path="/toprated" element={<TopRatedPage />} />
         <Route path="/upcoming" element={<UpcomingPage />} />
-        <Route path="/movie/:title/:id" element={<MovieDetailPage />} />
+        <Route path="/movie/:id" element={<MovieDetailPage />} />
         <Route path="/*" element={<ErrorPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
