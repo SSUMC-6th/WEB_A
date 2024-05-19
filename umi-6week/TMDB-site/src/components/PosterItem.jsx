@@ -90,8 +90,8 @@ function PosterItem({ id, title, voteAverage, overview, posterPath }) {
         <PosterOutline>
           <Title>{title}</Title>
           <Vote>
-            <img src="src/assets/star.png" width="12px" height="12px" />
-            <VoteAverage>{voteAverage}</VoteAverage>
+            {/* <img src="src/assets/star.png" width="12px" height="12px" /> */}
+            <VoteAverage>⭐️ {voteAverage}</VoteAverage>
           </Vote>
         </PosterOutline>
       </PosterContainer>

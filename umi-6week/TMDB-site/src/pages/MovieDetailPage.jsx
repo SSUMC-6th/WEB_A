@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import CreditData from "../components/CreditData";
 import axios from "axios";
+import SimilarData from "../components/SimilarData";
 
 const Wrapper = styled.div`
   height: fit-content;
@@ -29,7 +30,8 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   text-align: center;
-  transform: translate(16vw, 18vh);
+  justify-content: center;
+  transform: translate(0, 18vh);
   color: white;
   img {
     border-radius: 8px;
@@ -41,6 +43,7 @@ const TitleContainer = styled.div`
 `;
 
 const OverviewContainer = styled.div`
+  width: 48vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,10 +56,11 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  margin-right: 8vw;
 `;
 
 const Overview = styled.p`
-  width: 600px;
+  width: 40vw;
   overflow: hidden;
   font-weight: 300;
   font-size: 14px;
@@ -90,6 +94,13 @@ const SubTitle = styled.div`
 
 const SubText = styled.div`
   color: #999;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: #888;
+  margin: 6px 0px 2px 0px;
 `;
 
 function MovieDetailPage() {
@@ -150,19 +161,23 @@ function MovieDetailPage() {
                   <SubText>{movies.runtime}분 </SubText>
                 </SubTitle>
               </TitleContainer>
-              <InfoContainer>
-                <Title>⭐️ {Number(movies.vote_average).toFixed(1)}</Title>
-                <Overview>
-                  {movies.overview == ""
-                    ? "TMDB에서 제공하는 API에 상세 줄거리 정보가 없습니다."
-                    : movies.overview}
-                </Overview>
-              </InfoContainer>
+              {loading ? null : (
+                <InfoContainer>
+                  <Title>⭐️ {Number(movies.vote_average).toFixed(1)}</Title>
+                  <Line></Line>
+                  <Overview>
+                    {movies.overview == ""
+                      ? "TMDB에서 제공하는 API에 상세 줄거리 정보가 없습니다."
+                      : movies.overview}
+                  </Overview>
+                </InfoContainer>
+              )}
             </OverviewContainer>
           </Container>
         </Blur>
       </Background>
       <CreditData movie_id={id} />
+      <SimilarData movie_id={id} selected_movie={movies.title} />
     </Wrapper>
   );
 }

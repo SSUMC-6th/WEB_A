@@ -9,7 +9,7 @@ const Header = styled.header`
   top: 0;
   width: 100vw;
   height: 60px;
-  background: #000;
+  backdrop-filter: blur(10px);
 `;
 
 const Contents = styled.div`
@@ -32,7 +32,12 @@ const Nav = styled.nav`
   }
 `;
 
+const Logo = styled(NavLink)`
+  font-weight: 900;
+`;
+
 const NavItem = styled(NavLink)`
+  transition: font-size 0.5s;
   &:hover {
     font-size: 18px;
     cursor: pointer;
@@ -44,18 +49,18 @@ function Navbar() {
     <Header>
       <Contents>
         <div>
-          <NavItem
+          <Logo
             to="/"
             style={({ isActive }) => ({ color: isActive ? "white" : "white" })}
           >
-            UMC Movie
-          </NavItem>
+            UMC MOVIE
+          </Logo>
         </div>
 
         <Nav>
           <ul>
             <NavItem to="/signup">
-              <li>회원가입</li>
+              <li>Sign Up</li>
             </NavItem>
             <NavItem to="/popular">
               <li>Popular</li>

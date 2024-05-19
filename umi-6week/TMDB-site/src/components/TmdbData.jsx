@@ -34,7 +34,7 @@ function TmdbData({ apiType }) {
       options
     )
       .then((response) => response.json())
-      .then((response) => setMovies(response.results))
+      .then((response) => setMovies(response.results.slice(0, 18)))
       .then(() => setLoading(false))
       .catch((err) => console.error(err));
   }, []);

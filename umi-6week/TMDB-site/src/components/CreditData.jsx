@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
-  margin: 100px 0px 120px 0px;
+  margin: 100px 0px 80px 0px;
 `;
 
 const Container = styled.div`
@@ -20,7 +20,9 @@ const Container = styled.div`
 `;
 
 const SubTitleNav = styled.div`
+  width: 100vw;
   height: fit-content;
+  justify-content: center;
   display: flex;
   margin-bottom: 48px;
   gap: 20px;
@@ -35,6 +37,7 @@ const SubTitle = styled.button`
   border: none;
   border-bottom: 3px solid ${(props) => props.color};
   padding-bottom: 8px;
+  transition: color 0.5s;
 `;
 
 const Cast = styled.div`
@@ -52,7 +55,7 @@ function CreditData({ movie_id }) {
   const [casts, setCasts] = useState([]);
   const [crews, setCrews] = useState([]);
   const [creditNav, setCreditNav] = useState(true);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const onClickCasts = () => {
     setCreditNav(true);
@@ -72,7 +75,7 @@ function CreditData({ movie_id }) {
   };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     //cast
     fetch(
       `https://api.themoviedb.org/3/movie/${movie_id}/credits?language=en-US`,
@@ -80,7 +83,7 @@ function CreditData({ movie_id }) {
     )
       .then((response) => response.json())
       .then((response) => setCasts(response.cast.slice(0, 8)))
-      .then(() => setLoading(false))
+      // .then(() => setLoading(false))
       .catch((err) => console.error(err));
     //crew
     fetch(
@@ -89,7 +92,7 @@ function CreditData({ movie_id }) {
     )
       .then((response) => response.json())
       .then((response) => setCrews(response.crew.slice(0, 8)))
-      .then(() => setLoading(false))
+      // .then(() => setLoading(false))
       .catch((err) => console.error(err));
   }, []);
 
