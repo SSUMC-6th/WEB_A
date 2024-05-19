@@ -7,9 +7,8 @@ const Background = styled.div`
   left: 0;
   bottom: 0;
   width: 100vw;
-  // height: 20px;
-  background-color: #222;
-  color: white;
+  background: linear-gradient(transparent, #000);
+  color: #333;
 `;
 
 const FootText = styled.div`

@@ -6,25 +6,35 @@ import CreditItem from "./CreditItem";
 
 const Wrapper = styled.div`
   width: 100vw;
-  height: 770px;
   display: flex;
   justify-content: center;
-  margin: 60px 0px;
+  margin: 100px 0px 120px 0px;
 `;
 
 const Container = styled.div`
-  width: 85vw;
-  height: 500px;
+  width: 80vw;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
 `;
 
-const SubTitle = styled.h1`
-  width: 90%;
-  color: white;
-  text-align: left;
+const SubTitleNav = styled.div`
+  height: fit-content;
+  display: flex;
+  margin-bottom: 48px;
+  gap: 20px;
+`;
+
+const SubTitle = styled.button`
+  width: 170px;
+  height: fit-content;
+  color: ${(props) => props.color};
+  font-size: 32px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid ${(props) => props.color};
+  padding-bottom: 8px;
 `;
 
 const Cast = styled.div`
@@ -32,6 +42,7 @@ const Cast = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 32px;
+  gap: 20px 16px;
 `;
 
 const Crew = styled(Cast)``;
@@ -40,7 +51,16 @@ const Crew = styled(Cast)``;
 function CreditData({ movie_id }) {
   const [casts, setCasts] = useState([]);
   const [crews, setCrews] = useState([]);
+  const [creditNav, setCreditNav] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  const onClickCasts = () => {
+    setCreditNav(true);
+  };
+
+  const onClickCrews = () => {
+    setCreditNav(false);
+  };
 
   const options = {
     method: "GET",
@@ -76,30 +96,39 @@ function CreditData({ movie_id }) {
   return (
     <Wrapper>
       <Container>
-        <SubTitle>Main Cast</SubTitle>
-        <Cast>
-          {casts &&
-            casts.map((cast) => (
-              <CreditItem
-                key={cast.id}
-                name={cast.original_name}
-                role={cast.character}
-                profilePath={cast.profile_path}
-              />
-            ))}
-        </Cast>
-        <SubTitle>Main Crew</SubTitle>
-        <Crew>
-          {crews &&
-            crews.map((crew) => (
-              <CreditItem
-                key={crew.id}
-                name={crew.original_name}
-                role={crew.job}
-                profilePath={crew.profile_path}
-              />
-            ))}
-        </Crew>
+        <SubTitleNav>
+          <SubTitle onClick={onClickCasts} color={creditNav ? "white" : "gray"}>
+            Main Cast
+          </SubTitle>
+          <SubTitle onClick={onClickCrews} color={creditNav ? "gray" : "white"}>
+            Main Crew
+          </SubTitle>
+        </SubTitleNav>
+        {creditNav ? (
+          <Cast>
+            {casts &&
+              casts.map((cast) => (
+                <CreditItem
+                  key={cast.id}
+                  name={cast.original_name}
+                  role={cast.character}
+                  profilePath={cast.profile_path}
+                />
+              ))}
+          </Cast>
+        ) : (
+          <Crew>
+            {crews &&
+              crews.map((crew) => (
+                <CreditItem
+                  key={crew.id}
+                  name={crew.original_name}
+                  role={crew.job}
+                  profilePath={crew.profile_path}
+                />
+              ))}
+          </Crew>
+        )}
       </Container>
     </Wrapper>
   );

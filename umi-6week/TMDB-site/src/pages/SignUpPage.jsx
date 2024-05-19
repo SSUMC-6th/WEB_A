@@ -117,7 +117,7 @@ function SignUpPage() {
   return (
     <>
       <Container>
-        <Title>회원가입 페이지</Title>
+        <Title>회원가입</Title>
         <FormContainer
           onSubmit={handleSubmit((data) => {
             console.log(data);

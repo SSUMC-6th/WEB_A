@@ -49,7 +49,7 @@ function TmdbData({ apiType }) {
               key={movie.id}
               id={movie.id}
               title={movie.title}
-              voteAverage={movie.vote_average}
+              voteAverage={Number(movie.vote_average).toFixed(1)}
               overview={movie.overview}
               posterPath={movie.poster_path}
             />
