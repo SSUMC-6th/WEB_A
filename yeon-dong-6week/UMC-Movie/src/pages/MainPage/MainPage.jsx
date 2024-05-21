@@ -1,4 +1,4 @@
-import {StyledMainPage, SearchContainer, SearchInput, SearchButton, MovieContainer, MovieInfo, MovieInfoContent, StyledMovieContainer} from "./MainPage.style"
+import {StyledMainPage, SearchContainer, SearchInput, SearchButton, MovieContainer, MovieInfo, MovieInfoContent, StyledMovieContainer, StyledLodingText} from "./MainPage.style"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
@@ -6,6 +6,7 @@ const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 function MainPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [loading, setLoading] = useState(false); // State to manage loading state
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ function MainPage() {
   useEffect(() => {
     // TMDB API에서 현재 상영 중인 영화를 가져오는 함수
     const fetchMovies = async () => {
+      setLoading(true);
       const options = {
         method: 'GET',
         headers: {
@@ -35,16 +37,13 @@ function MainPage() {
         .then(response => response.json())
         .then(response => setMovies(response.results))
         .catch(err => console.error(err));
+        setLoading(false);
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
     if (debouncedSearch) {
       fetchMovies();
-      console.log("검색됨");
     }
-    fetchMovies();
   }, [debouncedSearch]); // 배열을 전달하여 한 번만 호출되도록 설정
-
-
 
     return (
       <>
@@ -54,7 +53,7 @@ function MainPage() {
           <SearchButton></SearchButton>
         </SearchContainer>
         <StyledMovieContainer>
-        <MovieContainer>
+        {loading ? (<StyledLodingText>데이터를 받아오는 중 입니다</StyledLodingText>) : <MovieContainer>
           {movies.map(movie => (
             <MovieInfo key={movie.id} onClick={() => navigate(`/movie/${movie.id}`)}>
               {movie.poster_path && (
@@ -66,7 +65,7 @@ function MainPage() {
               </MovieInfoContent>
             </MovieInfo>
           ))}
-        </MovieContainer>
+        </MovieContainer>}
         </StyledMovieContainer>
       </>
     )

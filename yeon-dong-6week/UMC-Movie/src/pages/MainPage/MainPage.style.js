@@ -79,3 +79,11 @@ export const MovieInfoContent = styled.div`
 export const StyledMovieContainer = styled.div`
     margin-top: 20px;
 `;
+
+export const StyledLodingText = styled.p`
+    margin-top: 64px;
+    color: tomato;
+    font-size: 30px;
+    font-weight: 300;
+    text-align: center;
+`;

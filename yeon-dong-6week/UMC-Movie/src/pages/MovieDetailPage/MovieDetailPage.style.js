@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Background = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   position: absolute;
   background-image: linear-gradient(rgba(40, 43, 49, 0.8), rgba(0, 0, 0, 0.8)),
     url(${(props) => props.image});
@@ -13,7 +13,7 @@ export const Background = styled.div`
 
 export const Blur = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   backdrop-filter: blur(10px);
 `;
 
@@ -59,3 +59,7 @@ export const Text = styled.div`
 `;
 
 export const Box = styled.div``;
+
+export const StyledCreditText = styled.div`
+  display: inline;
+`;
