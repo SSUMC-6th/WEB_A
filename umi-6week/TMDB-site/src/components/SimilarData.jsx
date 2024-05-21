@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import PosterItem from "./PosterItem";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -75,25 +76,27 @@ function SimilarData({ movie_id, selected_movie }) {
     setMore((more) => !more);
   };
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMzQ0NDVkYTFkMDBkYTg5ZWQ4ZTAwMWI3YTgyODZlMCIsInN1YiI6IjY1YzFkZTIxOGU4ZDMwMDE2Mjc3ZDE3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OzdBlisLcPNQkSG7QN-39G7eW1rERKixo8VH5Ym3mwc",
-    },
-  };
-
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movie_id}/similar?language=en-US&page=1`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setMovies(response.results.slice(0, 10)))
-      .then(() => setLoading(false))
-      .catch((err) => console.error(err));
+    const getMovies = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movie_id}/similar`,
+          {
+            params: {
+              api_key: "d34445da1d00da89ed8e001b7a8286e0",
+              language: "en-US",
+              page: 1,
+            },
+          }
+        );
+        setMovies(response.data.results.slice(0, 10));
+        setLoading(false);
+      } catch (error) {
+        console.error("API 에러", error);
+        setMovies([]);
+      }
+    };
+    getMovies();
   }, []);
 
   return (

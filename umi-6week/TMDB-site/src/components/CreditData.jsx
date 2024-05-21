@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CreditItem from "./CreditItem";
+import axios from "axios";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -55,7 +56,7 @@ function CreditData({ movie_id }) {
   const [casts, setCasts] = useState([]);
   const [crews, setCrews] = useState([]);
   const [creditNav, setCreditNav] = useState(true);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const onClickCasts = () => {
     setCreditNav(true);
@@ -65,35 +66,29 @@ function CreditData({ movie_id }) {
     setCreditNav(false);
   };
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMzQ0NDVkYTFkMDBkYTg5ZWQ4ZTAwMWI3YTgyODZlMCIsInN1YiI6IjY1YzFkZTIxOGU4ZDMwMDE2Mjc3ZDE3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OzdBlisLcPNQkSG7QN-39G7eW1rERKixo8VH5Ym3mwc",
-    },
-  };
-
   useEffect(() => {
-    // setLoading(true);
-    //cast
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movie_id}/credits?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setCasts(response.cast.slice(0, 8)))
-      // .then(() => setLoading(false))
-      .catch((err) => console.error(err));
-    //crew
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movie_id}/credits?language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setCrews(response.crew.slice(0, 8)))
-      // .then(() => setLoading(false))
-      .catch((err) => console.error(err));
+    const getCredits = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${movie_id}/credits`,
+          {
+            params: {
+              api_key: "d34445da1d00da89ed8e001b7a8286e0",
+              language: "en-US",
+              page: 1,
+            },
+          }
+        );
+        setCasts(response.data.cast.slice(0, 8));
+        setCrews(response.data.crew.slice(0, 8));
+        setLoading(false);
+      } catch (error) {
+        console.error("API 에러", error);
+        setCasts([]);
+        setCrews([]);
+      }
+    };
+    getCredits();
   }, []);
 
   return (
