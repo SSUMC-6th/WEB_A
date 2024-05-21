@@ -5,8 +5,20 @@ const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
 function MainPage() {
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500); // 500ms delay
+
+    // Clean up the timeout if the component unmounts or the search term changes
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search]);
 
   useEffect(() => {
     // TMDB API에서 현재 상영 중인 영화를 가져오는 함수
@@ -25,8 +37,14 @@ function MainPage() {
         .catch(err => console.error(err));
     };
     // 페이지가 로드될 때 영화 데이터를 가져오도록 호출
+    if (debouncedSearch) {
+      fetchMovies();
+      console.log("검색됨");
+    }
     fetchMovies();
-  }, [search]); // 배열을 전달하여 한 번만 호출되도록 설정
+  }, [debouncedSearch]); // 배열을 전달하여 한 번만 호출되도록 설정
+
+
 
     return (
       <>
@@ -55,4 +73,4 @@ function MainPage() {
   }
   
   export default MainPage
-  
+
