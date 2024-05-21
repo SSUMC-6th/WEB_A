@@ -129,15 +129,7 @@ function MovieDetailPage() {
       }
     };
     getMovies();
-  }, []);
-
-  // const starCount = () => {
-  //   const star = [];
-  //   for (let i = 0; i < Math.floor(movies.vote_average); i++) {
-  //     star.push("⭐️ ");
-  //   }
-  //   return star;
-  // };
+  }, [movies]);
 
   return (
     <Wrapper>

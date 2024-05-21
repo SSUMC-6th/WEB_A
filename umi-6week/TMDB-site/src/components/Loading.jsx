@@ -26,7 +26,7 @@ function Loading() {
   return (
     <Background>
       <img src={Rolling} alt="Loading..." width="5%" />
-      <Text>Loading...</Text>
+      <Text>LOADING...</Text>
     </Background>
   );
 }

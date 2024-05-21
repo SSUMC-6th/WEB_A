@@ -32,7 +32,7 @@ function TmdbData({ apiType }) {
             },
           }
         );
-        setMovies(response.data.results.slice(0, 10));
+        setMovies(response.data.results.slice(0, 18));
         setLoading(false);
       } catch (error) {
         console.error("API 에러", error);

@@ -13,10 +13,12 @@ import ErrorPage from "./pages/ErrorPage";
 import MovieDetailPage from "./pages/MovieDetailPage";
 import SignUpPage from "./pages/SignUpPage";
 import LogInPage from "./pages/LogInPage";
+import ScrollToTop from "./components/ScrollTop";
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/nowplaying" element={<NowPlayingPage />} />

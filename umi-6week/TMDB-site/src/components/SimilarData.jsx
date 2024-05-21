@@ -66,6 +66,19 @@ const LoadText = styled.h3`
   margin: 20px 0px;
 `;
 
+// componentDidMount(){
+//   this.getMovies();
+// }
+
+// componentDidUpdate(preProps){
+//   console.log('update!');
+//   if(preProps.locaton.pathname !== this.props.locaton.pathname){
+//     console.log(true);
+//     this.setState({loading: true});
+//     this.getMovies();
+//   }
+// }
+
 // eslint-disable-next-line react/prop-types
 function SimilarData({ movie_id, selected_movie }) {
   const [movies, setMovies] = useState([]);
@@ -97,7 +110,7 @@ function SimilarData({ movie_id, selected_movie }) {
       }
     };
     getMovies();
-  }, []);
+  }, [movie_id]);
 
   return (
     <>

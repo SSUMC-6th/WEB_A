@@ -89,7 +89,7 @@ function CreditData({ movie_id }) {
       }
     };
     getCredits();
-  }, []);
+  }, [movie_id]);
 
   return (
     <Wrapper>
