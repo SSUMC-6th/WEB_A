@@ -88,11 +88,24 @@ const PosterContainer = styled.div`
     }
 `;
 
+const Loading = styled.div`
+    position: relative;
+    top: 60px;
+    color: white;
+    background-color: rgba(0,0,0, 0.2);
+    width: 60%;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 40px;
+`;
+
 
 function MainPage() {
     const [findInput, setFindInput] = useState("");
     const [movies, setMovies] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (event) => {
         setFindInput(event.target.value);
@@ -107,15 +120,18 @@ function MainPage() {
                   Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZThjODFlNjJkODliOTZjNDMwZDZmNWYwZGMxMWVjNyIsInN1YiI6IjY2MzFjOGZiMmEwOWJjMDEyNjU4MjZlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XuNpaO61da4Wqx285BQZNBwxldsyVjM87-73ah1XkFo'
                 }
             };
-    
+            setLoading(true);
             fetch(`https://api.themoviedb.org/3/search/movie?query=${findInput}&include_adult=false&language=en-US&page=1`, options)
                 .then(response => response.json())
                 .then(response => {
                     console.log(response);
                     setMovies(response.results);
                     setIsVisible(true);
+                    setLoading(false);
                 })
-                .catch(err => console.error(err));
+                .catch(err => {
+                    console.error(err);
+                    setLoading(false)});
         }
     }, 500), []);
     
@@ -138,6 +154,7 @@ function MainPage() {
                 <FindButtonSt type="button"/>
             </FindFormSt>
         </FindContainer>
+        {loading ? <Loading>데이터를 받아오는 중입니다.</Loading>:
         <PosterContainer isVisible={isVisible}>{movies.map(movie =>
             <Movie
               key={movie.id}
@@ -147,7 +164,7 @@ function MainPage() {
               release_date={movie.release_date}
               overview={movie.overview}/>
             )}
-            </PosterContainer>
+            </PosterContainer>}
     </Main>
     )
 }
