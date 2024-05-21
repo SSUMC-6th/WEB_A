@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
+import { debounce } from 'lodash'
 import searchIcon from '../assets/search.svg'
 import Movie from '../components/Movie'
 
@@ -35,7 +36,7 @@ const FindContainer = styled.div`
     font-weight: bold;
 `;
 
-const FindFormSt = styled.form`
+const FindFormSt = styled.div`
     display: flex;
 `;
 
@@ -95,30 +96,34 @@ function MainPage() {
 
     const handleInputChange = (event) => {
         setFindInput(event.target.value);
-    }
+    };
 
+    const loadMovies = useCallback(debounce((findInput)=>{
+        if (findInput) {
+            const options = {
+                method: 'GET',
+                headers: {
+                  accept: 'application/json',
+                  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZThjODFlNjJkODliOTZjNDMwZDZmNWYwZGMxMWVjNyIsInN1YiI6IjY2MzFjOGZiMmEwOWJjMDEyNjU4MjZlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XuNpaO61da4Wqx285BQZNBwxldsyVjM87-73ah1XkFo'
+                }
+            };
+    
+            fetch(`https://api.themoviedb.org/3/search/movie?query=${findInput}&include_adult=false&language=en-US&page=1`, options)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    setMovies(response.results);
+                    setIsVisible(true);
+                })
+                .catch(err => console.error(err));
+        }
+    }, 500), []);
+    
     
 
-   useEffect(() => {
-            if (findInput) {
-                const options = {
-                    method: 'GET',
-                    headers: {
-                      accept: 'application/json',
-                      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZThjODFlNjJkODliOTZjNDMwZDZmNWYwZGMxMWVjNyIsInN1YiI6IjY2MzFjOGZiMmEwOWJjMDEyNjU4MjZlNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XuNpaO61da4Wqx285BQZNBwxldsyVjM87-73ah1XkFo'
-                    }
-                };
-    
-                fetch(`https://api.themoviedb.org/3/search/movie?query=${findInput}&include_adult=false&language=en-US&page=1`, options)
-                    .then(response => response.json())
-                    .then(response => {
-                        console.log(response);
-                        setMovies(response.results);
-                        setIsVisible(true);
-                    })
-                    .catch(err => console.error(err));
-            }
-        }, [findInput]); // findInput이 변경될 때마다 useEffect 실행
+    useEffect(() => {
+        loadMovies(findInput);
+    }, [findInput]); // findInput이 변경될 때마다 useEffect 실행
 
 
     return (
@@ -128,8 +133,10 @@ function MainPage() {
         </Welcome>
         <FindContainer>
             <div>Find your movies !</div>
-            <FindInputSt type="text" onChange={handleInputChange} value={findInput}/>
-            <FindButtonSt type="button"/>
+            <FindFormSt>
+                <FindInputSt type="text" onChange={handleInputChange} value={findInput}/>
+                <FindButtonSt type="button"/>
+            </FindFormSt>
         </FindContainer>
         <PosterContainer isVisible={isVisible}>{movies.map(movie =>
             <Movie
