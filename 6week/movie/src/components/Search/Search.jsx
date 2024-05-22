@@ -12,21 +12,23 @@ import {
   Star,
 } from "./Search.style";
 import axios from "axios";
+import { useDebounce } from "../../hooks/useDebounce";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const apiKey = "d2cb276ab0ca7b65595d1e9a2fd4ea84";
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const handleSearch = useCallback(async () => {
-    if (searchTerm) {
+    if (debouncedSearchTerm) {
       try {
         const response = await axios.get(
           `https://api.themoviedb.org/3/search/movie`,
           {
             params: {
               api_key: apiKey,
-              query: searchTerm,
+              query: debouncedSearchTerm,
             },
           }
         );
@@ -34,8 +36,10 @@ export const Search = () => {
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
+    } else {
+      setMovies([]);
     }
-  }, [searchTerm, apiKey]);
+  }, [debouncedSearchTerm]);
 
   useEffect(() => {
     handleSearch();
@@ -57,7 +61,7 @@ export const Search = () => {
       />
       <StyledSearchView>
         <StyledMovieList>
-          {searchTerm &&
+          {debouncedSearchTerm &&
             movies.map((movie) => (
               <StyledMovieCard key={movie.id}>
                 <Poster
