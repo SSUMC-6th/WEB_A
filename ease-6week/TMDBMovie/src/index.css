@@ -1,14 +1,16 @@
 body{
-  background-color: rgb(3, 49, 90);
+  background-color: rgb(2, 45, 84);
  }
 
 .PosterContainer{
   position: relative;
   top: 60px;
+  margin-bottom: 100px;
   display:grid;
   justify-content:center;
   grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 20px;
+  
 }
 
 

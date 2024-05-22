@@ -39,6 +39,7 @@ function PopularPage() {
             <div className="PosterContainer">{Movies.map(movie =>
             <Movie
               key={movie.id}
+              id={movie.id}
               title={movie.title}
               poster_path={movie.poster_path}
               vote_avg={movie.vote_average}

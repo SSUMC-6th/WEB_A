@@ -23,7 +23,7 @@ function App() {
         <Route path="/popular" element= {<PopularPage/>}/>
         <Route path="/toprated" element= {<TopRatedPage/>}/>
         <Route path="/upcoming" element= {<UpComing/>}/>
-        <Route path="/movie/:title" element= {<MovieDetailPage/>}/>
+        <Route path="/movie/:id" element= {<MovieDetailPage/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/*" element={<NotFound/>}/>
       </Routes>

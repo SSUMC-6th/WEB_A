@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 const SignupContainer = styled.div`
     margin-top: 20px;
+    padding-top: 100px;
+    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     position: absolute;

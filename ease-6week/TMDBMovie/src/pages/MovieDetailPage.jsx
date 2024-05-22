@@ -1,19 +1,21 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import Credit from '../components/Credit'
 
 
 
 const Background = styled.div`
   background-image: url(${props => `https://image.tmdb.org/t/p/w500/${props.poster_path}`});
   width: 100%;
-  height: 100vh;
+  height: auto;
   background-size: cover;
   background-position: center;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: -99;
   ::before{
     position: absolute;
     content: "";
@@ -21,9 +23,15 @@ const Background = styled.div`
     left:0px;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.08);
-    z-index: -1;
+    background-color: rgba(0,0,0,0.04);
+    z-index: -100;
   }
+`;
+
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
 `;
 
 const DetailContainer = styled.div`
@@ -34,7 +42,6 @@ const DetailContainer = styled.div`
     align-items: center; // 세로 중앙 정렬
     height: 100vh; // 뷰포트의 전체 높이
     width: 80%; // 너비를 80%로 설정, 원하는 대로 조절 가능
-    z-index: 1;
     `;
 
 const MovieImage = styled.img`
@@ -64,6 +71,8 @@ flex-direction: column;
 
 function MovieDetailPage() {
     const { state } = useLocation();
+    const { id } = useParams();
+    console.log(id);
     const title = state && state.title;
     const poster_path = state && state.poster_path;
     const vote_avg = state && state.vote_avg;
@@ -78,6 +87,7 @@ function MovieDetailPage() {
     }
 
     return (
+        <PageContainer>
         <Background poster_path={poster_path}>
         <DetailContainer>
           <MovieImage
@@ -92,6 +102,9 @@ function MovieDetailPage() {
           </div>
         </DetailContainer>
         </Background>
+        <Credit id={id}/>
+        </PageContainer>
+        
       );
 }
 

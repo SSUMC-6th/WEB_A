@@ -15,6 +15,7 @@ const Vote = styled.div`
 `;
 
 const MovieContainer = styled.div`
+    cursor: pointer;
 `;
 
 const MovieImage  = styled.img`
@@ -37,11 +38,11 @@ const InfoContainer  = styled.div`
 
 
 
-function Movie({title, poster_path, vote_avg, release_date, overview}){
+function Movie({id, title, poster_path, vote_avg, release_date, overview}){
     const navigate = useNavigate();
     
     return(
-        <MovieContainer  onClick={() => {navigate(`/movie/${title}`, {state: {title: title, poster_path: poster_path, vote_avg: vote_avg, release_date: release_date, overview: overview}})}}>
+        <MovieContainer  onClick={() => {navigate(`/movie/${id}`, {state: {id: id, title: title, poster_path: poster_path, vote_avg: vote_avg, release_date: release_date, overview: overview}})}}>
             <Poster><MovieImage
               alt="movieImage" 
               src= {`https://image.tmdb.org/t/p/w500/${poster_path}`}
