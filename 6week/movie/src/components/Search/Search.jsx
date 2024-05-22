@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   StyleSearch,
   StyleTitle,
@@ -19,6 +20,7 @@ export const Search = () => {
   const [movies, setMovies] = useState([]);
   const apiKey = "d2cb276ab0ca7b65595d1e9a2fd4ea84";
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const navigate = useNavigate();
 
   const handleSearch = useCallback(async () => {
     if (debouncedSearchTerm) {
@@ -50,6 +52,10 @@ export const Search = () => {
     return stars > 0 ? Array(stars).fill("⭐").join("") : "";
   };
 
+  const handleMovieClick = (movieId) => {
+    navigate(`/movie/${movieId}`);
+  };
+
   return (
     <StyleSearch>
       <StyleTitle>🎥 Find your movies!</StyleTitle>
@@ -63,7 +69,10 @@ export const Search = () => {
         <StyledMovieList>
           {debouncedSearchTerm &&
             movies.map((movie) => (
-              <StyledMovieCard key={movie.id}>
+              <StyledMovieCard
+                key={movie.id}
+                onClick={() => handleMovieClick(movie.id)}
+              >
                 <Poster
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={`Movie Poster of ${movie.title}`}
