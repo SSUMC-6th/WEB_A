@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 const Container = styled.div`
   width: fit-content;
@@ -26,7 +27,7 @@ const Input = styled.input`
   width: 500px;
   height: 44px;
   padding-left: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   background-color: white;
   color: black;
   border-radius: 999px;
@@ -34,6 +35,14 @@ const Input = styled.input`
   &::placeholder {
     color: gray;
   }
+`;
+
+const ValidText = styled.div`
+  font-size: 14px;
+  color: red;
+  margin: 10px 0px 16px 0px;
+  text-align: left;
+  margin-left: 18px;
 `;
 
 const SubmitBtn = styled.input`
@@ -52,16 +61,37 @@ const SubmitBtn = styled.input`
 `;
 
 function LogInPage() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
+
   return (
     <>
       <Container>
         <Title>로그인</Title>
         <FormContainer>
           <InputContainer>
-            <Input type="id" placeholder="아이디" />
-            <Input type="password" placeholder="비밀번호" />
+            <Input
+              {...register("id", {
+                required: "아이디를 입력해주세요!",
+              })}
+              type="text"
+              placeholder="아이디를 입력해주세요"
+            />
+            <ValidText>{errors?.id?.message}</ValidText>
+            <Input
+              {...register("password", {
+                required: "비밀번호를 입력해주세요!",
+              })}
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
+            <ValidText>{errors?.password?.message}</ValidText>
           </InputContainer>
-          <SubmitBtn type="submit" value="로그인" />
+          <SubmitBtn type="submit" value="로그인" disabled={!isValid} />
         </FormContainer>
       </Container>
     </>

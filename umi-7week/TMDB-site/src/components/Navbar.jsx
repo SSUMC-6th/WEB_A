@@ -59,6 +59,9 @@ function Navbar() {
 
         <Nav>
           <ul>
+            <NavItem to="/login">
+              <li>Log In</li>
+            </NavItem>
             <NavItem to="/signup">
               <li>Sign Up</li>
             </NavItem>

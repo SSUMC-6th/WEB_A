@@ -135,6 +135,14 @@ function SignUpPage() {
             />
             <ValidText>{errors?.name?.message}</ValidText>
             <Input
+              {...register("id", {
+                required: "아이디는 필수 입력입니다",
+              })}
+              type="text"
+              placeholder="아이디를 입력해주세요"
+            />
+            <ValidText>{errors?.id?.message}</ValidText>
+            <Input
               {...register("email", {
                 required: "이메일은 필수 입력입니다",
                 pattern: {
@@ -186,7 +194,7 @@ function SignUpPage() {
             <ValidText>{errors?.password?.message}</ValidText>
             <Input
               {...register("passwordConfirm", {
-                required: "이메일을 확인해주세요",
+                required: "비밀번호 확인은 필수입니다",
                 validate: validatePassword,
               })}
               type="password"
