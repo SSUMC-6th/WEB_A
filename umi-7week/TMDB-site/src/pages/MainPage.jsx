@@ -17,11 +17,6 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-// const Banner = styled.div`
-//   width: 100vw;
-//   height: 100px;
-// `;
-
 const HeadText = styled.h1``;
 
 const SearchArea = styled.div`
@@ -119,9 +114,6 @@ function MainPage() {
 
   return (
     <Wrapper>
-      {/* <Banner>
-        <HeadText>환영합니다</HeadText>
-      </Banner> */}
       <SearchArea>
         <HeadText>🎥 Find your movies !</HeadText>
         <SearchContainer>
