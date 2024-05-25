@@ -5,7 +5,7 @@ import TmdbData from "../components/TmdbData";
 function UpcomingPage() {
   return (
     <>
-      <TmdbData apiType="upcoming" />
+      <TmdbData apiType="upcoming" currentPage="1" />
     </>
   );
 }

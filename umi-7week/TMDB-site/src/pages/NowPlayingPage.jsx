@@ -5,7 +5,7 @@ import TmdbData from "../components/TmdbData";
 function NowPlayingPage() {
   return (
     <>
-      <TmdbData apiType="now_playing" />
+      <TmdbData apiType="now_playing" currentPage="1" />
     </>
   );
 }

@@ -5,7 +5,7 @@ import TmdbData from "../components/TmdbData";
 function TopRatedPage() {
   return (
     <>
-      <TmdbData apiType="top_rated" />
+      <TmdbData apiType="top_rated" currentPage="1" />
     </>
   );
 }

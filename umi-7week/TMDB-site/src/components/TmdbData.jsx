@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-function TmdbData({ apiType }) {
+function TmdbData({ apiType, currentPage }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,7 +28,7 @@ function TmdbData({ apiType }) {
             params: {
               api_key: "d34445da1d00da89ed8e001b7a8286e0",
               language: "en-US",
-              page: 1,
+              page: `${currentPage}`,
             },
           }
         );
@@ -40,7 +40,7 @@ function TmdbData({ apiType }) {
       }
     };
     getMovies();
-  }, []);
+  }, [currentPage, apiType]);
 
   return (
     <>
