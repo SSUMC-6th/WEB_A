@@ -29,7 +29,7 @@ export const SignUp = () => {
   });
 
   const handleGoToLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   const handleChange = (field, value) => {

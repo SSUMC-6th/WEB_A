@@ -11,6 +11,7 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 import { NotFound } from "./components/notfound/notFound";
 import { MovieDetail } from "./pages/Moviedetail/MovieDetail";
 import { SignUp } from "./pages/SignUpPage/SignUp";
+import { Login } from "./pages/LoginPage/Login";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
         <Route path="/top-rated" element={<TopRated />} />
         <Route path="/upcoming" element={<Upcoming />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/movie/:movie_id" element={<MovieDetail />} />
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </Router>
