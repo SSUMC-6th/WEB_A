@@ -13,6 +13,7 @@ export const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
+    id: "",
     email: "",
     age: "",
     password: "",
@@ -20,6 +21,7 @@ export const SignUp = () => {
   });
   const [errors, setErrors] = useState({
     name: "",
+    id: "",
     email: "",
     age: "",
     password: "",
@@ -41,6 +43,9 @@ export const SignUp = () => {
     switch (field) {
       case "name":
         errMsg = value ? "" : "이름을 입력해주세요.";
+        break;
+      case "id":
+        errMsg = value ? "" : "아이디를 입력해주세요.";
         break;
       case "email":
         errMsg = value.includes("@") ? "" : "유효한 이메일을 입력해주세요.";
@@ -105,6 +110,13 @@ export const SignUp = () => {
         type="text"
       />
       {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+      <StyledInput
+        placeholder="아이디를 입력해주세요"
+        value={formData.id}
+        onChange={(e) => handleChange("id", e.target.value)}
+        type="text"
+      />
+      {errors.id && <ErrorMessage>{errors.id}</ErrorMessage>}
       <StyledInput
         placeholder="이메일을 입력해주세요"
         value={formData.email}
