@@ -10,11 +10,13 @@ import {
   Star,
   Title,
 } from "../../components/MovieData/MovieDataFetcher.style";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 
 const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
   const observer = useRef();
   const navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
 
   const fetchMovies = useCallback(
     async (page) => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${apiEndpoint}`,
@@ -35,10 +38,14 @@ const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
             },
           }
         );
-        setMovies((prevMovies) => [...prevMovies, ...response.data.results]);
-        setHasMore(response.data.page < response.data.total_pages);
+        setTimeout(() => {
+          setMovies((prevMovies) => [...prevMovies, ...response.data.results]);
+          setHasMore(response.data.page < response.data.total_pages);
+          setLoading(false);
+        }, 2000);
       } catch (error) {
         console.error("Error fetching movies:", error);
+        setLoading(false);
       }
     },
     [apiEndpoint, apiKey, language]
@@ -52,13 +59,13 @@ const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
     (element) => {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
+        if (entries[0].isIntersecting && hasMore && !loading) {
           setPage((prevPage) => prevPage + 1);
         }
       });
       if (element) observer.current.observe(element);
     },
-    [hasMore]
+    [hasMore, loading]
   );
 
   return (
@@ -82,6 +89,7 @@ const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
           </div>
         </MovieWrapper>
       ))}
+      {loading && <LoadingSpinner />}
     </Center>
   );
 };
