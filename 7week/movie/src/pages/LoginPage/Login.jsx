@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../apis/PostLogin";
+import { UserContext } from "../../components/UserData/UsetData";
 import {
   StyledButton,
   StyledTitle,
@@ -6,10 +9,10 @@ import {
   StyledInput,
   ErrorMessage,
 } from "./Login.style";
-import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { login: loginUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     id: "",
     password: "",
@@ -57,12 +60,32 @@ export const Login = () => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (canSubmit()) {
-      console.log("로그인 정보:", formData);
-      alert("로그인이 성공적으로 완료되었습니다.");
-      navigate("/");
+      try {
+        const response = await login({
+          username: formData.id,
+          password: formData.password,
+        });
+        console.log("로그인 성공:", response.data);
+
+        // 유저 정보를 가져오는 대신 로그인 상태 설정
+        loginUser({ username: response.data.username }, response.data.token);
+
+        alert("로그인이 성공적으로 완료되었습니다.");
+        navigate("/");
+      } catch (error) {
+        console.error(
+          "로그인 실패:",
+          error.response ? error.response.data : error.message
+        );
+        alert(
+          `로그인 중 오류가 발생했습니다: ${
+            error.response ? error.response.data.message : error.message
+          }`
+        );
+      }
     } else {
       alert("모든 필드를 올바르게 채우고 에러를 해결해 주세요.");
     }
