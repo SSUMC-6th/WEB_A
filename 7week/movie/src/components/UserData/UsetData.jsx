@@ -1,46 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 import { getUserInfo } from "../../apis/GetUserInfo";
 
 export const UserContext = createContext({
   user: null,
-  loading: true,
+  loading: false,
   login: () => {},
   logout: () => {},
 });
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getUserInfo(token)
-        .then((response) => {
-          setUser(response.data);
-        })
-        .catch((error) => {
-          console.error("유저 정보 불러오기 실패:", error);
-          setLoading(false);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
+  const login = async (userData, token) => {
+    localStorage.setItem("token", token);
+    setLoading(true);
+    try {
+      const response = await getUserInfo(token);
+      setUser(response.data);
+    } catch (error) {
+      console.error("유저 정보 불러오기 실패:", error);
+    } finally {
       setLoading(false);
     }
-  }, []);
-
-  const login = (userData, token) => {
-    localStorage.setItem("token", token);
-    getUserInfo(token)
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((error) => {
-        console.error("유저 정보 불러오기 실패:", error);
-      });
   };
 
   const logout = () => {

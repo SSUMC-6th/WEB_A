@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../components/UserData/UsetData";
 import {
   StyledNav,
   StyledSignUp,
+  StyledLogin,
+  StyledLogout,
   StyledPopular,
   StyledNowPlaying,
   StyledTopRated,
@@ -10,16 +14,33 @@ import {
 } from "./nav.style";
 
 export const Nav = () => {
+  const { user, logout } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleGoToSignUp = () => {
-    navigate('/signup');
-  }
-  const navigate = useNavigate();
+    navigate("/signup");
+  };
+
+  const handleGoToLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <StyledNav>
       <StyledHome onClick={() => navigate("/")}>UMC Movie</StyledHome>
-      <StyledSignUp onClick={handleGoToSignUp}>회원가입</StyledSignUp>
+      {user ? (
+        <StyledLogout onClick={handleLogout}>로그아웃</StyledLogout>
+      ) : (
+        <>
+          <StyledSignUp onClick={handleGoToSignUp}>회원가입</StyledSignUp>
+          <StyledLogin onClick={handleGoToLogin}>로그인</StyledLogin>
+        </>
+      )}
       <StyledPopular onClick={() => navigate("/popular")}>
         Popular
       </StyledPopular>

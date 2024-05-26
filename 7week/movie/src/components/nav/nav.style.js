@@ -26,6 +26,10 @@ export const StyledHome = styled(NavItem)`
 
 export const StyledSignUp = styled(NavItem)``;
 
+export const StyledLogin = styled(NavItem)``;
+
+export const StyledLogout = styled(NavItem)``;
+
 export const StyledPopular = styled(NavItem)``;
 
 export const StyledNowPlaying = styled(NavItem)``;
