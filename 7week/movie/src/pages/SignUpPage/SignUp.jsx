@@ -160,11 +160,7 @@ export const SignUp = () => {
       {errors.passwordConfirm && (
         <ErrorMessage>{errors.passwordConfirm}</ErrorMessage>
       )}
-      <StyledButton
-        onClick={handleSubmit}
-        disabled={!canSubmit()}
-        canSubmit={canSubmit()}
-      >
+      <StyledButton onClick={handleSubmit} disabled={!canSubmit()}>
         제출하기
       </StyledButton>
       <LoginLink onClick={handleGoToLogin}>

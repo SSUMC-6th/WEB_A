@@ -110,11 +110,7 @@ export const Login = () => {
       />
       {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
 
-      <StyledButton
-        onClick={handleSubmit}
-        disabled={!canSubmit()}
-        canSubmit={canSubmit()}
-      >
+      <StyledButton onClick={handleSubmit} disabled={!canSubmit()}>
         로그인
       </StyledButton>
     </StyledWrapper>

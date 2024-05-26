@@ -37,17 +37,14 @@ export const LoginLink = styled.div`
 `;
 
 export const StyledButton = styled.button`
-  background-color: ${(props) => (props.canSubmit ? "lightblue" : "#ccc")};
+  background-color: ${(props) => (props.disabled ? "#ccc" : "lightblue")};
   color: white;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
   margin: 10px 0;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   width: 42%;
   font-size: 16px;
-  &:disabled {
-    cursor: default;
-    opacity: 0.7;
-  }
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
 `;
