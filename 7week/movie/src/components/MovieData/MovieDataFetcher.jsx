@@ -11,13 +11,18 @@ import {
 } from "./MovieDataFetcher.style";
 import { useNavigate } from "react-router-dom";
 
-export const MovieDataFetcher = ({ apiEndpoint, apiKey }) => {
+export const MovieDataFetcher = ({
+  apiEndpoint,
+  apiKey,
+  language = "ko-KR",
+  page = 1,
+}) => {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
 
   const handleImageClick = (movieId) => {
     navigate(`/movie/${movieId}`);
-  }
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -27,8 +32,8 @@ export const MovieDataFetcher = ({ apiEndpoint, apiKey }) => {
           {
             params: {
               api_key: apiKey,
-              language: "ko-KR",
-              page: 1,
+              language: language,
+              page: page,
             },
           }
         );
@@ -39,7 +44,7 @@ export const MovieDataFetcher = ({ apiEndpoint, apiKey }) => {
       }
     };
     fetchMovies();
-  }, [apiEndpoint, apiKey]);
+  }, [apiEndpoint, apiKey, language, page]);
 
   return (
     <Center>
@@ -65,4 +70,6 @@ export const MovieDataFetcher = ({ apiEndpoint, apiKey }) => {
 MovieDataFetcher.propTypes = {
   apiEndpoint: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
+  language: PropTypes.string,
+  page: PropTypes.number,
 };
