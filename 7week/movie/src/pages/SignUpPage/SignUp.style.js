@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -36,9 +36,8 @@ export const LoginLink = styled.div`
   text-decoration: underline;
 `;
 
-
 export const StyledButton = styled.button`
-  background-color: ${props => props.canSubmit ? 'lightblue' : '#ccc'};
+  background-color: ${(props) => (props.canSubmit ? "lightblue" : "#ccc")};
   color: white;
   border: none;
   border-radius: 20px;
