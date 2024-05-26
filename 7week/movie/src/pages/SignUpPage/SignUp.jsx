@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signUp } from "./apis/PostSignUp";
 import {
   StyledButton,
   StyledTitle,
@@ -7,7 +9,6 @@ import {
   ErrorMessage,
   LoginLink,
 } from "./SignUp.style";
-import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -78,6 +79,8 @@ export const SignUp = () => {
         errMsg =
           value !== formData.password ? "비밀번호가 일치하지 않습니다." : "";
         break;
+      default:
+        break;
     }
     setErrors((prev) => ({ ...prev, [field]: errMsg }));
   };
@@ -89,12 +92,22 @@ export const SignUp = () => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (canSubmit()) {
-      console.log("회원가입 정보:", formData);
-      alert("회원가입이 성공적으로 완료되었습니다.");
-      navigate("/");
+      try {
+        const response = await signUp(formData);
+        console.log("회원가입 성공:", response.data);
+        alert("회원가입이 성공적으로 완료되었습니다.");
+        navigate("/login");
+      } catch (error) {
+        console.error("회원가입 실패:", error);
+        alert(
+          `회원가입 중 오류가 발생했습니다: ${
+            error.response?.data?.message || error.message
+          }`
+        );
+      }
     } else {
       alert("모든 필드를 올바르게 채우고 에러를 해결해 주세요.");
     }
