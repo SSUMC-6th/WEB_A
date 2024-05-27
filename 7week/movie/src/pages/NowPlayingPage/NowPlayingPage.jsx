@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
+import React from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,92 +13,99 @@ import {
 } from "../../components/MovieData/MovieDataFetcher.style";
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 
-const MovieDataFetcher = ({ apiEndpoint, apiKey, language = "ko-KR" }) => {
-  const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const observer = useRef();
+const fetchMovies = async (
+  { pageParam = 1 },
+  apiEndpoint,
+  apiKey,
+  language
+) => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${apiEndpoint}`,
+    {
+      params: {
+        api_key: apiKey,
+        language: language,
+        page: pageParam,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const MovieDataFetcher = ({
+  apiEndpoint,
+  apiKey,
+  language = "ko-KR",
+}) => {
   const navigate = useNavigate();
+
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["movies", apiEndpoint, apiKey, language],
+    queryFn: ({ pageParam = 1 }) =>
+      fetchMovies({ pageParam }, apiEndpoint, apiKey, language),
+    getNextPageParam: (lastPage) =>
+      lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined,
+  });
+
+  const observer = React.useRef();
+  const lastMovieElementRef = React.useCallback(
+    (element) => {
+      if (isFetchingNextPage) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+      if (element) observer.current.observe(element);
+    },
+    [isFetchingNextPage, fetchNextPage, hasNextPage]
+  );
 
   const handleImageClick = (movieId) => {
     navigate(`/movie/${movieId}`);
   };
 
-  const fetchMovies = useCallback(
-    async (page) => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${apiEndpoint}`,
-          {
-            params: {
-              api_key: apiKey,
-              language: language,
-              page: page,
-            },
-          }
-        );
-        setTimeout(() => {
-          setMovies((prevMovies) => [...prevMovies, ...response.data.results]);
-          setHasMore(response.data.page < response.data.total_pages);
-          setLoading(false);
-        }, 2000);
-      } catch (error) {
-        console.error("Error fetching movies:", error);
-        setLoading(false);
-      }
-    },
-    [apiEndpoint, apiKey, language]
-  );
-
-  useEffect(() => {
-    fetchMovies(page);
-  }, [fetchMovies, page]);
-
-  const lastMovieElementRef = useCallback(
-    (element) => {
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      });
-      if (element) observer.current.observe(element);
-    },
-    [hasMore, loading]
-  );
+  if (isFetching && !isFetchingNextPage) return <LoadingSpinner />;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <Center>
-      {movies.map((movie, index) => (
-        <MovieWrapper
-          key={`${movie.id}-${index}`}
-          onClick={() => handleImageClick(movie.id)}
-          ref={movies.length === index + 1 ? lastMovieElementRef : null}
-        >
-          <Poster
-            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-            alt={`Movie Poster ${movie.title}`}
-          />
-          <div>
-            <Title>{movie.title}</Title>
-            <Star>{movie.vote_average}</Star>
-            <Overview>
-              <p>{movie.overview}</p>
-            </Overview>
-          </div>
-        </MovieWrapper>
+      {data.pages.map((page, pageIndex) => (
+        <React.Fragment key={pageIndex}>
+          {page.results.map((movie, index) => (
+            <MovieWrapper
+              key={`${movie.id}-${index}`}
+              onClick={() => handleImageClick(movie.id)}
+              ref={
+                page.results.length === index + 1 ? lastMovieElementRef : null
+              }
+            >
+              <Poster
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={`Movie Poster ${movie.title}`}
+              />
+              <div>
+                <Title>{movie.title}</Title>
+                <Star>{movie.vote_average}</Star>
+                <Overview>
+                  <p>{movie.overview}</p>
+                </Overview>
+              </div>
+            </MovieWrapper>
+          ))}
+        </React.Fragment>
       ))}
-      {loading && <LoadingSpinner />}
+      {isFetchingNextPage && <LoadingSpinner />}
     </Center>
   );
-};
-
-MovieDataFetcher.propTypes = {
-  apiEndpoint: PropTypes.string.isRequired,
-  apiKey: PropTypes.string.isRequired,
-  language: PropTypes.string,
 };
 
 export const NowPlaying = () => {
@@ -109,4 +117,10 @@ export const NowPlaying = () => {
       <div>NowPlaying</div>
     </div>
   );
+};
+
+MovieDataFetcher.propTypes = {
+  apiEndpoint: PropTypes.string.isRequired,
+  apiKey: PropTypes.string.isRequired,
+  language: PropTypes.string,
 };
