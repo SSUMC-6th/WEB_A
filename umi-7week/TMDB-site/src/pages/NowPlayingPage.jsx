@@ -56,7 +56,7 @@ function NowPlayingPage() {
               posterPath={movie.poster_path}
             />
           ))}
-        {loading && <p>Loading...</p>}
+        {loading && <Loading />}
         {error && <p>Error!</p>}
         <div ref={loader} />
       </Container>
