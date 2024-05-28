@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
@@ -17,6 +18,7 @@ function useFetch(query, page) {
           params: {
             api_key: "d34445da1d00da89ed8e001b7a8286e0",
             language: "en-US",
+            page: page,
           },
         }
       );
@@ -25,7 +27,7 @@ function useFetch(query, page) {
     } catch (err) {
       setError(err);
     }
-  }, [query, page]);
+  }, [page]);
 
   useEffect(() => {
     sendQuery(query);
