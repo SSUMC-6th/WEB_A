@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: fit-content;
@@ -61,10 +62,11 @@ const SubmitBtn = styled.input`
 `;
 
 function LogInPage() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
@@ -72,7 +74,30 @@ function LogInPage() {
     <>
       <Container>
         <Title>로그인</Title>
-        <FormContainer>
+        <FormContainer
+          onSubmit={handleSubmit((data) => {
+            fetch(`http://localhost:8080/auth/login`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: data.id,
+                password: data.password,
+              }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                if (res.token != undefined) {
+                  localStorage.setItem("token", res.token);
+                  alert("로그인 되었습니다");
+                  navigate("/");
+                } else {
+                  alert("로그인 정보를 다시 한 번 확인해주세요");
+                }
+              });
+          })}
+        >
           <InputContainer>
             <Input
               {...register("id", {

@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
 import PosterItem from "../components/PosterItem";
-import Loading from "../components/Loading";
+// import Loading from "../components/Loading";
 import useDebounce from "../hooks/useDebounce";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -88,7 +89,11 @@ const LoadText = styled.h2`
 function MainPage() {
   const [searchWord, setSearchWord] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadApi, setLoadApi] = useState(true);
   const [movies, setMovies] = useState([]);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  let token = localStorage.getItem("token");
 
   const debounceWord = useDebounce(searchWord, 500);
 
@@ -112,10 +117,30 @@ function MainPage() {
       .catch((err) => console.error(err));
   }, [debounceWord]);
 
+  useEffect(() => {
+    fetch(`http://localhost:8080/auth/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setName(res.name))
+      .then(() => setLoadApi(false))
+      .then(() => navigate("/"));
+  }, [token]);
+
   return (
     <Wrapper>
       <SearchArea>
-        <HeadText>🎥 Find your movies !</HeadText>
+        <HeadText>
+          {loadApi
+            ? "로딩중"
+            : token
+            ? `🎥 ${name}님, 오늘의 영화를 골라보세요!`
+            : "SMUFLIX에 오신 걸 환영합니다"}
+        </HeadText>
         <SearchContainer>
           <SearchBar onChange={(e) => setSearchWord(e.target.value)} />
           <SearchIcon>🔍</SearchIcon>

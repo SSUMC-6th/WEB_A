@@ -89,7 +89,7 @@ function SignUpPage() {
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const password = useRef({}); //이건 왜??
+  const password = useRef({});
   password.current = watch("password", "");
   //비밀번호 확인
   const validatePassword = (value) => {
@@ -120,9 +120,32 @@ function SignUpPage() {
         <Title>회원가입</Title>
         <FormContainer
           onSubmit={handleSubmit((data) => {
-            console.log(data);
-            navigate(`/login`);
-            alert("회원가입 완료!");
+            fetch(`http://localhost:8080/auth/signup`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: data.name,
+                email: data.email,
+                age: data.age,
+                username: data.id,
+                password: data.password,
+                passwordCheck: data.passwordConfirm,
+              }),
+            }).then((res) => {
+              const { status } = res;
+              if (status === 201) {
+                alert("회원가입 완료!");
+                navigate("/login");
+              }
+              if (status === 401) {
+                alert("비밀번호를 확인해주세요!");
+              }
+              if (status === 409) {
+                alert("이미 존재하는 계정입니다");
+              }
+            });
           })}
         >
           <InputContainer>
@@ -206,7 +229,7 @@ function SignUpPage() {
         </FormContainer>
         <LoginContainer>
           <Text>이미 아이디가 있으신가요?</Text>
-          <LoginLink href="/">로그인 페이지로 이동하기</LoginLink>
+          <LoginLink href="/login">로그인 페이지로 이동하기</LoginLink>
         </LoginContainer>
       </Container>
     </>
