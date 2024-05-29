@@ -14,24 +14,27 @@ import MovieDetailPage from "./pages/MovieDetailPage";
 import SignUpPage from "./pages/SignUpPage";
 import LogInPage from "./pages/LogInPage";
 import ScrollToTop from "./components/ScrollTop";
+import { AuthProvider } from "./components/UserData";
 
 function App() {
   return (
     <>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/nowplaying" element={<NowPlayingPage />} />
-        <Route path="/popular" element={<PopularPage />} />
-        <Route path="/toprated" element={<TopRatedPage />} />
-        <Route path="/upcoming" element={<UpcomingPage />} />
-        <Route path="/movie/:id" element={<MovieDetailPage />} />
-        <Route path="/*" element={<ErrorPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LogInPage />} />
-      </Routes>
-      <Navbar />
-      <Footer />
+      <AuthProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/nowplaying" element={<NowPlayingPage />} />
+          <Route path="/popular" element={<PopularPage />} />
+          <Route path="/toprated" element={<TopRatedPage />} />
+          <Route path="/upcoming" element={<UpcomingPage />} />
+          <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route path="/*" element={<ErrorPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LogInPage />} />
+        </Routes>
+        <Navbar />
+        <Footer />
+      </AuthProvider>
     </>
   );
 }

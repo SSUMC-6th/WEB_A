@@ -1,9 +1,9 @@
 //eslint-disable-next-line
 import React from "react";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./UserData";
 
 const Header = styled.header`
   position: fixed;
@@ -47,28 +47,7 @@ const NavItem = styled(NavLink)`
 `;
 
 function Navbar() {
-  const navigate = useNavigate();
-  // const [isLogIn, setIsLogIn] = useState(false);
-  let token = localStorage.getItem("token");
-
-  // eslint-disable-next-line no-undef
-  useEffect(() => {
-    fetch(`http://localhost:8080/auth/me`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => res.json());
-    // .then(() => setIsLogIn(true))
-    // .then(() => console.log(isLogIn));
-  }, [token]);
-
-  const onLogout = () => {
-    // setIsLogIn(false);
-    localStorage.clear();
-    navigate("/");
-  };
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <Header>
@@ -84,9 +63,9 @@ function Navbar() {
 
         <Nav>
           <ul>
-            {token ? (
+            {isLoggedIn ? (
               <>
-                <NavItem onClick={onLogout}>
+                <NavItem onClick={logout}>
                   <li>Log Out</li>
                 </NavItem>
               </>
