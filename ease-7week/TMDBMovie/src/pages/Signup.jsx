@@ -85,10 +85,38 @@ function Signup(){
         setIsInputFilled(allInputFilled);
     }, [watchInput]);
 
-    const onSubmit = data =>{
-        console.log(data);
-        alert("회원가입에 성공했습니다!");
-        navigate('/');
+    const onSubmit = async data =>{
+        try{
+            const response = await fetch('http://localhost:8080/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    email: data.email,
+                    age: data.age,
+                    username: data.username,
+                    password: data.password,
+                    passwordCheck: data.passwordCheck,
+                }),
+            });
+            const responseData = await response.json();
+            if(response.status==201){
+                console.log(data);
+                alert("회원가입에 성공했습니다!");
+                navigate('/login');
+            } else if(response.status==409){
+                alert(responseData.message);
+            } else if(response.status==400){
+                alert(responseData.message);
+            }
+        } catch (error) {
+            console.error('회원가입 중 에러 발생:', error);
+            alert('회원가입 과정에서 오류가 발생했습니다.');
+        }
+
+        
     }
 
     return(
@@ -101,12 +129,6 @@ function Signup(){
                 )}
                 placeholder="이름을 입력해주세요"/>
                 <ErrorSt>{errors?.name?.message}</ErrorSt> {/*validation 실패 시 에러 메시지 표시*/}
-                <InputSt type="text" {...register("ID", {
-                    required: "아이디를 입력해주세요!"
-                    }
-                )}
-                placeholder="아이디를 입력해주세요"/>
-                <ErrorSt>{errors?.ID?.message}</ErrorSt>
                 <InputSt type="text" {...register("email", {
                     required: "이메일을 입력해주세요!",
                     pattern: {
@@ -129,7 +151,13 @@ function Signup(){
                 )}
                 placeholder="나이를 입력해주세요"/>
                 <ErrorSt>{errors?.age?.message}</ErrorSt>
-                <InputSt type="password" {...register("pwd", {
+                <InputSt type="text" {...register("username", {
+                    required: "아이디를 입력해주세요!"
+                    }
+                )}
+                placeholder="아이디를 입력해주세요"/>
+                <ErrorSt>{errors?.username?.message}</ErrorSt>
+                <InputSt type="password" {...register("password", {
                     required: "비밀번호를 입력해주세요!",
                     minLength: {
                         value: 4,
@@ -146,19 +174,19 @@ function Signup(){
                     }
                 )}
                 placeholder="비밀번호를 입력해주세요"/>
-                <ErrorSt>{errors?.pwd?.message}</ErrorSt>
-                <InputSt type="password" {...register("pwdchk", {
+                <ErrorSt>{errors?.password?.message}</ErrorSt>
+                <InputSt type="password" {...register("passwordCheck", {
                     required: "비밀번호를 다시 입력해주세요!",
                     validate: {
                         MatchPwd: (value) => {
-                            const { pwd } = getValues();
-                            return pwd === value || "비밀번호가 일치하지 않습니다!";
+                            const { password } = getValues();
+                            return password === value || "비밀번호가 일치하지 않습니다!";
                         }
                     }
                     }
                 )}
                 placeholder="비밀번호 확인"/>
-                <ErrorSt>{errors?.pwdchk?.message}</ErrorSt>
+                <ErrorSt>{errors?.passwordCheck?.message}</ErrorSt>
                 <ButtonSt type="submit" disabled={!isInputFilled}>제출하기</ButtonSt>
             </FormSt>
             <GoLoginContainer>

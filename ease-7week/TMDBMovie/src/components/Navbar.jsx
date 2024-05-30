@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -34,6 +34,7 @@ const NavbarContainer = styled.div`
     // `;
 
     const NavbarMenu = styled(NavLink)`
+        display: ${(props)=>props.isLogin==="로그아웃"? 'none' :'block'};
         text-decoration: none;
         color: white;
         &.active{
@@ -52,7 +53,27 @@ const NavbarContainer = styled.div`
         }
     `;
 
+    const LoginContainer = styled.div`
+        
+    `;
+
 function Navbar() {
+    const [isLogin, setIsLogin] = useState("로그인");
+
+    useEffect(()=>{
+        if (localStorage.getItem('token')!=null){
+            setIsLogin("로그아웃");
+            console.log(isLogin);
+        }
+    }, [])
+
+    function onLogout(){
+        if(isLogin==="로그아웃"){
+            setIsLogin("로그인");
+            localStorage.removeItem("token");
+        }
+    }
+
     return (
     <NavbarContainer>
         <Logo>
@@ -61,12 +82,12 @@ function Navbar() {
             </NavbarMenu>
         </Logo>
         <NavbarSt>
-            <NavbarMenu to="/signup">
-                <NavContent>회원가입</NavContent>
-            </NavbarMenu>
-            <NavbarMenu to="/login">
-                <NavContent>로그인</NavContent>
-            </NavbarMenu>
+                <NavbarMenu to="/signup" isLogin={isLogin}>
+                    <NavContent>회원가입</NavContent>
+                </NavbarMenu>
+                <NavbarMenu to="/login" onClick={(onLogout)}>
+                    <NavContent>{isLogin}</NavContent>
+                </NavbarMenu>
             <NavbarMenu to="/popular">
                 <NavContent>Popular</NavContent>
             </NavbarMenu>

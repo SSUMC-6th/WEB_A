@@ -106,6 +106,31 @@ function MainPage() {
     const [movies, setMovies] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState("");
+    const token = localStorage.getItem("token");
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            try{
+            const response = await fetch('http://localhost:8080/auth/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const responseData = await response.json();
+            if(response.status==200){
+                setUser(responseData.username);
+                console.log(responseData);
+            } else if(response.status==404){
+                alert(responseData.message);
+            }
+        } catch (error) {
+            console.error('유저 정보 로딩 중 에러 발생:', error);
+            alert('유저 정보 로딩 과정에서 오류가 발생했습니다.');
+        }};
+        fetchData();
+    }, [])
 
     const handleInputChange = (event) => {
         setFindInput(event.target.value);
@@ -145,7 +170,7 @@ function MainPage() {
     return (
     <Main>    
         <Welcome>
-            <div>환영합니다</div>
+            <div>{user}님 환영합니다</div>
         </Welcome>
         <FindContainer>
             <div>Find your movies !</div>

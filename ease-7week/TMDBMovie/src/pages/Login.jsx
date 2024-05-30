@@ -69,23 +69,45 @@ function Login(){
         setIsInputFilled(allInputFilled);
     }, [watchInput]);
     
-    const onSubmit = data =>{
-        console.log(data);
-        alert("로그인에 성공했습니다!");
-        navigate('/');
+
+    const onSubmit = async data =>{
+        try{
+            const response = await fetch('http://localhost:8080/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: data.username,
+                    password: data.password,
+                }),
+            });
+            const responseData = await response.json();
+            if(response.status==200){
+                console.log(data);
+                localStorage.setItem("token", responseData.token);
+                alert("로그인에 성공했습니다!");
+                navigate('/');
+            } else if(response.status==401){
+                alert(responseData.message);
+            }
+        } catch (error) {
+            console.error('로그인 중 에러 발생:', error);
+            alert('로그인 과정에서 오류가 발생했습니다.');
+        }
     }
 
     return(
         <LoginContainer>
         <LoginTitle>로그인 페이지</LoginTitle>
         <FormSt onSubmit={handleSubmit(onSubmit)}>
-            <InputSt type="text" {...register("id", {
+            <InputSt type="text" {...register("username", {
                 required: "아이디를 입력해주세요!"
                 }
             )}
             placeholder="아이디를 입력해주세요"/>
-            <ErrorSt>{errors?.id?.message}</ErrorSt> {/*validation 실패 시 에러 메시지 표시*/}
-            <InputSt type="password" {...register("pwd", {
+            <ErrorSt>{errors?.username?.message}</ErrorSt> {/*validation 실패 시 에러 메시지 표시*/}
+            <InputSt type="password" {...register("password", {
                 required: "비밀번호를 입력해주세요!",
                 minLength: {
                     value: 4,
@@ -102,7 +124,7 @@ function Login(){
                 }
             )}
             placeholder="비밀번호를 입력해주세요"/>
-            <ErrorSt>{errors?.pwd?.message}</ErrorSt>
+            <ErrorSt>{errors?.password?.message}</ErrorSt>
             <ButtonSt type="submit" disabled={!isInputFilled}>로그인</ButtonSt>
         </FormSt>
         </LoginContainer>
