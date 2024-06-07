@@ -37,6 +37,9 @@ const Input = styled.input`
   &::placeholder {
     color: gray;
   }
+  @media only screen and (max-width: 768px) {
+    width: 66vw;
+  }
 `;
 
 const ValidText = styled.div`
@@ -60,11 +63,15 @@ const SubmitBtn = styled.input`
     background-color: gray;
     color: black;
   }
+  @media only screen and (max-width: 768px) {
+    width: 68vw;
+  }
 `;
 
 const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
+  gap: 16px;
   margin-top: 20px;
 `;
 
@@ -76,7 +83,6 @@ const Text = styled.div`
 const LoginLink = styled.a`
   color: white;
   font-weight: 600;
-  margin-left: 40px;
 `;
 
 function SignUpPage() {

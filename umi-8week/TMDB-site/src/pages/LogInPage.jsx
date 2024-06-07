@@ -37,6 +37,9 @@ const Input = styled.input`
   &::placeholder {
     color: gray;
   }
+  @media only screen and (max-width: 768px) {
+    width: 66vw;
+  }
 `;
 
 const ValidText = styled.div`
@@ -59,6 +62,9 @@ const SubmitBtn = styled.input`
   &:disabled {
     background-color: gray;
     color: black;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 68vw;
   }
 `;
 

@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useContext } from "react";
 import { AuthContext } from "./UserData";
+import { useState } from "react";
+import { BsList, BsXLg } from "react-icons/bs";
 
 const Header = styled.header`
   position: fixed;
@@ -11,7 +13,8 @@ const Header = styled.header`
   top: 0;
   width: 100vw;
   height: 60px;
-  backdrop-filter: blur(10px);
+  background-color: black;
+  // backdrop-filter: blur(10px);
 `;
 
 const Contents = styled.div`
@@ -24,12 +27,25 @@ const Contents = styled.div`
 `;
 
 const Nav = styled.nav`
+  position: relative;
+  backdrop-filter: blur(10px);
   ul {
     display: flex;
+    gap: 24px;
     list-style: none;
+  }
 
-    li {
-      margin-left: 30px;
+  @media only screen and (max-width: 768px) {
+    ul {
+      display: ${(props) => (props.menuToggle ? "flex" : "none")};
+      flex-direction: column;
+      position: fixed;
+      top: 32px;
+      right: -14px;
+      width: 250px;
+      height: 100vh;
+      padding-top: 24px;
+      background-color: black;
     }
   }
 `;
@@ -46,8 +62,22 @@ const NavItem = styled(NavLink)`
   }
 `;
 
+const HamburgerMenu = styled.button`
+  border: 0;
+  background-color: transparent;
+
+  @media only screen and (min-width: 768px) {
+    display: none;
+  }
+`;
+
 function Navbar() {
   const { isLoggedIn, logout } = useContext(AuthContext);
+  const [menuToggle, setMenuToggle] = useState(false);
+
+  const menuOnOff = () => {
+    setMenuToggle((menuToggle) => !menuToggle);
+  };
 
   return (
     <Header>
@@ -61,7 +91,7 @@ function Navbar() {
           </Logo>
         </div>
 
-        <Nav>
+        <Nav menuToggle={menuToggle}>
           <ul>
             {isLoggedIn ? (
               <>
@@ -92,6 +122,13 @@ function Navbar() {
               <li>Upcoming</li>
             </NavItem>
           </ul>
+          <HamburgerMenu onClick={menuOnOff}>
+            {menuToggle ? (
+              <BsXLg style={{ color: "white" }} size="32px" />
+            ) : (
+              <BsList style={{ color: "white" }} size="32px" />
+            )}
+          </HamburgerMenu>
         </Nav>
       </Contents>
     </Header>

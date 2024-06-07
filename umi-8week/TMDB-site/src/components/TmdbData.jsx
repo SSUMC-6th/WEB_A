@@ -12,6 +12,7 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px 20px;
+  z-index: 1;
 `;
 
 // eslint-disable-next-line react/prop-types
