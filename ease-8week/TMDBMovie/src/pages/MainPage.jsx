@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { debounce } from 'lodash'
 import searchIcon from '../assets/search.svg'
 import Movie from '../components/Movie'
+import useStore from "../components/Store"
 
 const Main = styled.div`
     display: flex;
@@ -21,6 +22,9 @@ const Welcome = styled.div`
     height: 200px;
     font-size: 20px;
     font-weight: bold;
+    @media(max-width: 400px){
+        font-size: 15px;
+    }
 `;
 
 const FindContainer = styled.div`
@@ -30,10 +34,10 @@ const FindContainer = styled.div`
     align-items: center;
     margin-top: 30px;
     color: white;
-    width: 100%;
     height: 200px;
     font-size: 20px;
     font-weight: bold;
+    
 `;
 
 const FindFormSt = styled.div`
@@ -47,6 +51,12 @@ const FindInputSt = styled.input`
     height: 40px;
     border-radius: 20px;
     border: 0;
+    @media (max-width: 760px){
+    width: 65vw;
+    }
+    @media (max-width: 300px){
+    width: 195px;
+    }
 `;
 const FindButtonSt = styled.button`
     margin-top: 45px;
@@ -65,7 +75,8 @@ const PosterContainer = styled.div`
     display:${(props) => (props.isVisible ? 'grid' : 'none')};
     justify-content:center;
     grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 20px;
+    grid-gap: 30px;
+    place-items: center;
     width: 60%;
     margin: 0 auto;
     margin-bottom: 150px;
@@ -106,7 +117,7 @@ function MainPage() {
     const [movies, setMovies] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState("");
+    const {isLogined, user, setUser} = useStore(state => state);
     const token = localStorage.getItem("token");
 
     useEffect(()=>{
@@ -160,8 +171,6 @@ function MainPage() {
         }
     }, 500), []);
     
-    
-
     useEffect(() => {
         loadMovies(findInput);
     }, [findInput]); // findInput이 변경될 때마다 useEffect 실행
@@ -170,7 +179,7 @@ function MainPage() {
     return (
     <Main>    
         <Welcome>
-            <div>{{user}!=""? `${user}님 환영합니다` : '환영합니다'}</div>
+            <div>{isLogined===true? `${user}님 환영합니다` : '환영합니다'}</div>
         </Welcome>
         <FindContainer>
             <div>Find your movies !</div>

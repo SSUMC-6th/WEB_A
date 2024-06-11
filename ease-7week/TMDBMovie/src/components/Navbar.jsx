@@ -53,17 +53,15 @@ const NavbarContainer = styled.div`
         }
     `;
 
-    const LoginContainer = styled.div`
-        
-    `;
 
 function Navbar() {
     const [isLogin, setIsLogin] = useState("로그인");
 
     useEffect(()=>{
+        console.log(isLogin);
         if (localStorage.getItem('token')!=null){
             setIsLogin("로그아웃");
-            console.log(isLogin);
+            
         }
     }, [])
 
