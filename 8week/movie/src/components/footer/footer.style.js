@@ -8,4 +8,10 @@ export const StyledFooter = styled.div`
   background-color: #22264c;
   text-align: center;
   padding: 10px 0;
+  color: white;
+
+  @media (max-width: 768px) {
+    padding: 15px 0;
+    font-size: 14px;
+  }
 `;
