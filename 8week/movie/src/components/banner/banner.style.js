@@ -11,4 +11,10 @@ export const StyledBanner = styled.div`
   height: 200px;
   margin: 0 auto;
   color: white;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+  }
 `;
