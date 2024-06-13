@@ -14,6 +14,12 @@ export const Poster = styled.img`
   width: 200px;
   height: auto;
   margin-right: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+    width: 150px;
+    margin-right: 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -21,6 +27,12 @@ export const Title = styled.h1`
   margin-top: 100px;
   font-size: 36px;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 24px;
+  }
 `;
 
 export const Star = styled.h3`
@@ -29,17 +41,31 @@ export const Star = styled.h3`
   margin-bottom: 5px;
   word-wrap: break-word;
   width: 600px;
+
+  @media (max-width: 768px) {
+    text-align: center;
+    width: 100%;
+  }
 `;
 
 export const StyledCast = styled.h3`
   font-size: 20px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const StyledDetailsContainer = styled.div`
   display: flex;
   align-items: flex-start;
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const StyledCastContainer = styled.div`
@@ -48,6 +74,10 @@ export const StyledCastContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 `;
 
 export const StyledCastList = styled.ul`
@@ -66,6 +96,11 @@ export const StyledCastItem = styled.li`
   margin: 10px;
   width: 100px;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    margin: 5px;
+  }
 `;
 
 export const StyledCastImage = styled.img`
@@ -74,4 +109,9 @@ export const StyledCastImage = styled.img`
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 5px;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
 `;
