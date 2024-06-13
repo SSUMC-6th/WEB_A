@@ -20,17 +20,14 @@ export const Nav = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleGoToSignUp = () => {
-    navigate("/signup");
-  };
-
-  const handleGoToLogin = () => {
-    navigate("/login");
+  const handleNavigate = (path) => {
+    navigate(path);
+    setIsSidebarOpen(false);
   };
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    handleNavigate("/");
   };
 
   const toggleSidebar = () => {
@@ -40,27 +37,31 @@ export const Nav = () => {
   return (
     <>
       <StyledNav>
-        <StyledHome onClick={() => navigate("/")}>UMC Movie</StyledHome>
+        <StyledHome onClick={() => handleNavigate("/")}>UMC Movie</StyledHome>
         <MenuIcon onClick={toggleSidebar}>☰</MenuIcon>
         <div className="desktop-nav">
           {user ? (
             <StyledLogout onClick={handleLogout}>로그아웃</StyledLogout>
           ) : (
             <>
-              <StyledSignUp onClick={handleGoToSignUp}>회원가입</StyledSignUp>
-              <StyledLogin onClick={handleGoToLogin}>로그인</StyledLogin>
+              <StyledSignUp onClick={() => handleNavigate("/signup")}>
+                회원가입
+              </StyledSignUp>
+              <StyledLogin onClick={() => handleNavigate("/login")}>
+                로그인
+              </StyledLogin>
             </>
           )}
-          <StyledPopular onClick={() => navigate("/popular")}>
+          <StyledPopular onClick={() => handleNavigate("/popular")}>
             Popular
           </StyledPopular>
-          <StyledNowPlaying onClick={() => navigate("/now-playing")}>
+          <StyledNowPlaying onClick={() => handleNavigate("/now-playing")}>
             Now Playing
           </StyledNowPlaying>
-          <StyledTopRated onClick={() => navigate("/top-rated")}>
+          <StyledTopRated onClick={() => handleNavigate("/top-rated")}>
             Top Rated
           </StyledTopRated>
-          <StyledUpcoming onClick={() => navigate("/upcoming")}>
+          <StyledUpcoming onClick={() => handleNavigate("/upcoming")}>
             Upcoming
           </StyledUpcoming>
         </div>
@@ -70,20 +71,24 @@ export const Nav = () => {
           <StyledLogout onClick={handleLogout}>로그아웃</StyledLogout>
         ) : (
           <>
-            <StyledSignUp onClick={handleGoToSignUp}>회원가입</StyledSignUp>
-            <StyledLogin onClick={handleGoToLogin}>로그인</StyledLogin>
+            <StyledSignUp onClick={() => handleNavigate("/signup")}>
+              회원가입
+            </StyledSignUp>
+            <StyledLogin onClick={() => handleNavigate("/login")}>
+              로그인
+            </StyledLogin>
           </>
         )}
-        <StyledPopular onClick={() => navigate("/popular")}>
+        <StyledPopular onClick={() => handleNavigate("/popular")}>
           Popular
         </StyledPopular>
-        <StyledNowPlaying onClick={() => navigate("/now-playing")}>
+        <StyledNowPlaying onClick={() => handleNavigate("/now-playing")}>
           Now Playing
         </StyledNowPlaying>
-        <StyledTopRated onClick={() => navigate("/top-rated")}>
+        <StyledTopRated onClick={() => handleNavigate("/top-rated")}>
           Top Rated
         </StyledTopRated>
-        <StyledUpcoming onClick={() => navigate("/upcoming")}>
+        <StyledUpcoming onClick={() => handleNavigate("/upcoming")}>
           Upcoming
         </StyledUpcoming>
       </Sidebar>

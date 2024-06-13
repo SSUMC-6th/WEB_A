@@ -13,10 +13,10 @@ export const SidebarContainer = styled.div`
   z-index: 1000;
 `;
 
-export const CloseButton = styled.div`
-  font-size: 2rem;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-`;
+// export const CloseButton = styled.div`
+//   font-size: 2rem;
+//   cursor: pointer;
+//   position: absolute;
+//   top: 10px;
+//   right: 20px;
+// `;

@@ -1,10 +1,10 @@
-import { CloseButton, SidebarContainer } from "./slider.style";
+import { SidebarContainer } from "./slider.style";
 import PropTypes from "prop-types";
 
-export const Sidebar = ({ isOpen, toggleSidebar, children }) => {
+export const Sidebar = ({ isOpen, children }) => {
   return (
     <SidebarContainer isOpen={isOpen}>
-      <CloseButton onClick={toggleSidebar}>×</CloseButton>
+      {/* <CloseButton onClick={toggleSidebar}></CloseButton> */}
       {children}
     </SidebarContainer>
   );
@@ -12,6 +12,5 @@ export const Sidebar = ({ isOpen, toggleSidebar, children }) => {
 
 Sidebar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggleSidebar: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
