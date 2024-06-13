@@ -9,11 +9,20 @@ export const Center = styled.div`
   flex-direction: row;
   word-break: break-all;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    padding: 5px;
+    flex-direction: column;
+  }
 `;
 
 export const Poster = styled.img`
   width: 200px;
   height: auto;
+
+  @media (max-width: 768px) {
+    width: 210px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -21,6 +30,11 @@ export const Title = styled.h3`
   color: white;
   font-size: 16px;
   margin-left: 4%;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-left: 0;
+  }
 `;
 
 export const Star = styled.h3`
@@ -28,6 +42,11 @@ export const Star = styled.h3`
   color: white;
   font-size: 16px;
   margin-right: 5%;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-right: 0;
+  }
 `;
 
 export const Overview = styled.div.attrs({
@@ -52,5 +71,21 @@ export const MovieWrapper = styled.div`
   margin-right: 10px;
   &:hover ${Overview} {
     opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    margin-right: 5px;
+    margin-bottom: 10px;
+  }
+`;
+
+export const TitleAndStarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
   }
 `;

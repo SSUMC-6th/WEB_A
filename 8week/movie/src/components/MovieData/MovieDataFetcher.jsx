@@ -8,6 +8,7 @@ import {
   Poster,
   Star,
   Title,
+  TitleAndStarWrapper,
 } from "./MovieDataFetcher.style";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
@@ -55,13 +56,13 @@ export const MovieDataFetcher = ({
             src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
             alt={`Movie Poster ${movie.title}`}
           />
-          <div>
+          <TitleAndStarWrapper>
             <Title>{movie.title}</Title>
             <Star>{movie.vote_average}</Star>
             <Overview>
               <p>{movie.overview}</p>
             </Overview>
-          </div>
+          </TitleAndStarWrapper>
         </MovieWrapper>
       ))}
       {isFetching && <LoadingSpinner />}
