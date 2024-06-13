@@ -9,10 +9,20 @@ export const StyledWrapper = styled.div`
   color: white;
   width: 100%;
   min-height: 95vh;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+  }
 `;
 
 export const StyledTitle = styled.h2`
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -21,12 +31,20 @@ export const StyledInput = styled.input`
   border-radius: 20px;
   border: 1px solid #ccc;
   width: 40%;
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 export const ErrorMessage = styled.div`
   color: red;
   margin-top: 5px;
   font-size: 14px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -40,4 +58,9 @@ export const StyledButton = styled.button`
   width: 42%;
   font-size: 16px;
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+
+  @media (max-width: 768px) {
+    width: 80%;
+    font-size: 14px;
+  }
 `;
