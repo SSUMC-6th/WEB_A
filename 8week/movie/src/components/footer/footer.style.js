@@ -1,0 +1,17 @@
+import styled from "styled-components";
+
+export const StyledFooter = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #22264c;
+  text-align: center;
+  padding: 10px 0;
+  color: white;
+
+  @media (max-width: 768px) {
+    padding: 15px 0;
+    font-size: 14px;
+  }
+`;
