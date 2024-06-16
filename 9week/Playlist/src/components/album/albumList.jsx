@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { clearCart, calculateTotals } from "../../redux/cartSlice";
+import { calculateTotals } from "../../redux/cartSlice";
+import { openModal } from "../../redux/modalSlice";
 import AlbumItem from "../album/albumItem";
 import {
   StyledButton,
@@ -10,11 +11,10 @@ import {
   StyledTitle,
   StyledTotal,
 } from "./albumList.style";
+import Modal from "../modal/modal";
 
 const AlbumList = () => {
-  const { items, totalQuantity, totalPrice } = useSelector(
-    (state) => state.cart
-  );
+  const { items, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,12 +30,12 @@ const AlbumList = () => {
         ))}
       </StyledList>
       <StyledSummary>
-        <StyledTotal>총 수량: {totalQuantity}</StyledTotal>
         <StyledTotal>총 가격: ₩ {totalPrice}</StyledTotal>
       </StyledSummary>
-      <StyledButton onClick={() => dispatch(clearCart())}>
+      <StyledButton onClick={() => dispatch(openModal())}>
         장바구니 초기화
       </StyledButton>
+      <Modal />
     </StyledContainer>
   );
 };

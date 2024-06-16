@@ -1,15 +1,16 @@
 import "./App.css";
+import { StyledContainer } from "./Globalstyle";
 import AlbumList from "./components/album/albumList";
-import { StyledContainer, StyledHeader, StyledTitle } from "./Globalstyle";
+import Head from "./components/header/head";
 
 function App() {
   return (
-    <StyledContainer>
-      <StyledHeader>
-        <StyledTitle>UMC Playlist</StyledTitle>
-      </StyledHeader>
-      <AlbumList />
-    </StyledContainer>
+    <>
+      <Head />
+      <StyledContainer>
+        <AlbumList />
+      </StyledContainer>
+    </>
   );
 }
 

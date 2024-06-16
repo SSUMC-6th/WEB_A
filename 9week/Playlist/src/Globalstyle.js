@@ -8,6 +8,7 @@ export const StyledContainer = styled.div`
   padding: 20px;
   justify-content: center;
   align-items: center;
+  padding: 80px 20px 20px;
 `;
 
 export const StyledHeader = styled.header`
