@@ -1,10 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
-import cartItems from "../constants/cartItems";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+// import cartItems from "../constants/cartItems";
+import { getMusic } from "../apis/getMusic";
+
+export const getMusics = createAsyncThunk(
+  "cart/fetchCartItems",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getMusic();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
-  items: cartItems,
+  items: [],
   totalQuantity: 0,
   totalPrice: 0,
+  status: "idle",
+  error: null,
 };
 
 const cartSlice = createSlice({
@@ -46,14 +61,31 @@ const cartSlice = createSlice({
       state.totalPrice = totalPrice;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getMusics.pending, (state) => {
+        state.status = "로딩중";
+      })
+      .addCase(getMusics.fulfilled, (state, action) => {
+        state.status = "성공";
+        state.items = action.payload;
+        state.totalQuantity = action.payload.reduce(
+          (total, item) => total + item.amount,
+          0
+        );
+        state.totalPrice = action.payload.reduce(
+          (total, item) => total + item.amount * item.price,
+          0
+        );
+      })
+      .addCase(getMusics.rejected, (state, action) => {
+        state.status = "실패";
+        state.error = action.payload || "오류";
+        alert(action.payload || "오류");
+      });
+  },
 });
 
-export const {
-  addItem,
-  increment,
-  decrement,
-  removeItem,
-  clearCart,
-  calculateTotals,
-} = cartSlice.actions;
+export const { increment, decrement, removeItem, clearCart, calculateTotals } =
+  cartSlice.actions;
 export default cartSlice.reducer;
