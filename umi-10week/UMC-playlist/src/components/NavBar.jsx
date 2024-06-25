@@ -38,7 +38,7 @@ const Cart = styled.div`
   color: white;
 `;
 
-export const NavBar = () => {
+const NavBar = () => {
   const { totalAlbums } = useSelector((state) => state.cart);
 
   return (
@@ -53,3 +53,5 @@ export const NavBar = () => {
     </>
   );
 };
+
+export default NavBar;

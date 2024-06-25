@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import cartItems from "../constants/cartItems";
+import { fetchCartItems } from "../constants/fetchCartItems";
 
 const initialState = {
-  items: cartItems,
+  items: [],
+  loading: "idle",
   totalAlbums: 0,
   totalAmount: 0,
 };
@@ -39,7 +40,6 @@ const cartSlice = createSlice({
     calculateTotals: (state, action) => {
       let totalAlbums = 0;
       let totalAmount = 0;
-
       state.items.forEach((item) => {
         totalAlbums += item.amount;
         totalAmount += item.amount * item.price;
@@ -51,6 +51,20 @@ const cartSlice = createSlice({
     default: (state) => {
       return state || initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCartItems.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCartItems.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.items = action.payload;
+      })
+      .addCase(fetchCartItems.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

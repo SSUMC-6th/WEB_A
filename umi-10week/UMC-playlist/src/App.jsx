@@ -1,23 +1,23 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import "./App.css";
-import styled from "styled-components";
-import { NavBar } from "./components/NavBar";
-import PlayList from "./components/PlayList";
+import MainPage from "./pages/MainPage";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
+function RouteNotFound() {
+  alert("존재하지 않는 페이지입니다");
+  return <Navigate to="/" replace />;
+}
 
 function App() {
   return (
     <>
-      <Container>
-        <NavBar />
-        <PlayList />
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />}></Route>
+          <Route path="/*" element={<RouteNotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

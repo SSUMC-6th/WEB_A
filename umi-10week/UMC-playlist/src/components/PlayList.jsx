@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { calculateTotals, clearCart } from "../redux/cartSlice";
 import { useEffect } from "react";
+import { fetchCartItems } from "../constants/fetchCartItems";
+import Rolling from "../assets/rolling2.gif";
 
 const Container = styled.div`
   display: flex;
@@ -64,33 +66,55 @@ const Reset = styled.button`
   border-radius: 4px;
 `;
 
+const Load = styled.div`
+  display: flex;
+  background: linear-gradient(#272727, #111);
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 const PlayList = () => {
-  const { items, totalAmount } = useSelector((state) => state.cart);
+  const { items, totalAmount, status } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(calculateTotals());
-  }, [items]);
+    dispatch(fetchCartItems());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      dispatch(calculateTotals());
+      // console.log(items);
+    }
+  }, [items, dispatch, status]);
 
   const onReset = () => {
     dispatch(clearCart());
   };
+
   return (
     <>
-      <Container>
-        <TItle>당신이 선택한 음반</TItle>
-        <PlayListContainer>
-          {items.map((item) => (
-            <PlayListItem key={item.key} item={item} />
-          ))}
-        </PlayListContainer>
-        <Divider />
-        <TotalContainer>
-          <TotalsText>총 가격</TotalsText>
-          <Totals>{totalAmount}원</Totals>
-        </TotalContainer>
-        <Reset onClick={onReset}>장바구니 초기화하기</Reset>
-      </Container>
+      {status === "loading" ? (
+        <Load>
+          <img src={Rolling} alt="Loading..." width="50px" height="50px" />
+        </Load>
+      ) : (
+        <Container>
+          <TItle>당신이 선택한 음반</TItle>
+          <PlayListContainer>
+            {items.map((item) => (
+              <PlayListItem key={item.key} item={item} />
+            ))}
+          </PlayListContainer>
+          <Divider />
+          <TotalContainer>
+            <TotalsText>총 가격</TotalsText>
+            <Totals>{totalAmount}원</Totals>
+          </TotalContainer>
+          <Reset onClick={onReset}>장바구니 초기화하기</Reset>
+        </Container>
+      )}
     </>
   );
 };
