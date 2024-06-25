@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { calculateTotals } from "../../redux/cartSlice";
+import { calculateTotals, getMusics } from "../../redux/cartSlice";
 import { openModal } from "../../redux/modalSlice";
 import AlbumItem from "../album/albumItem";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import {
   StyledButton,
   StyledContainer,
@@ -14,12 +16,32 @@ import {
 import Modal from "../modal/modal";
 
 const AlbumList = () => {
-  const { items, totalPrice } = useSelector((state) => state.cart);
+  const { items, totalPrice, status, error } = useSelector(
+    (state) => state.cart
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(getMusics());
+    }
+  }, [status, dispatch]);
 
   useEffect(() => {
     dispatch(calculateTotals());
   }, [items, dispatch]);
+
+  if (status === "로딩중") {
+    return (
+      <StyledContainer>
+        <ClipLoader size={150} />
+      </StyledContainer>
+    );
+  }
+
+  if (status === "실패") {
+    return <div>{error}</div>;
+  }
 
   return (
     <StyledContainer>
